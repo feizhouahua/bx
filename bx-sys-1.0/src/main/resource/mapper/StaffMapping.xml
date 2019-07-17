@@ -23,8 +23,8 @@
 	</select>
 	
 	<!-- 根据id查找对象 -->
-	<select id="getStaffById"  resultType="list">
-		SELECT s.id,s.staff_name,s.sex,s.entry_time,a.depart_name,a.post_name FROM t_staff s,
+	<select id="getStaffById"  resultMap="list">
+		SELECT s.id,s.Loginname,s.password,s.staff_name,s.sex,s.entry_time,a.depart_name,a.post_name FROM t_staff s,
 		(SELECT p.id id,depart_name,post_name FROM t_post p,t_department d WHERE d.id=p.depart_id) a
 		WHERE s.post_id=a.id and s.id=#{id}
 	</select>

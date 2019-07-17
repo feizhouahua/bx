@@ -25,4 +25,7 @@ public interface DepartmentDao {
 	
 	//查询所有部门
 	public List<Department> getDepart_names(); 
+	
+	//根据depart_name查找对象
+	public Department getDepartmentByName(String depart_name);
 }

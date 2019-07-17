@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -72,11 +73,33 @@ public class StaffController {
 	@ResponseBody
 	@RequestMapping("resources/staff/ajax/post")
 	public String ajaxPost(@RequestParam String depart_name) throws UnsupportedEncodingException {
-		System.out.println("xxxxxxxxxxxxxxxxxxx");
 		List<Post> post_names=postService.getPost_names(depart_name);
 		JSONArray array=JSONArray.fromObject(post_names);
 		return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
 	}
 	
+	@RequestMapping("resources/staff/add")
+	public String add(@ModelAttribute Staff staff,Post post) {
+		Post p=postService.getPostByName(post.getPost_name());
+		staff.setPost(p);
+		staffService.addStaff(staff);
+		return "redirect:list.html?page=1";
+	}
+	
+	@RequestMapping("resources/staff/updatea")
+	public String updatea(@RequestParam int id,Model model) {
+		Staff staff=staffService.getStaffById(id);
+		model.addAttribute("staff", staff);
+		System.out.println(staff.getLoginname());
+		return "update";
+	}
+	
+	@RequestMapping("resources/staff/updateb")
+	public String updateb(@ModelAttribute Staff staff,Post post) {
+		Post p=postService.getPostByName(post.getPost_name());
+		staff.setPost(p);
+		staffService.addStaff(staff);
+		return "redirect:list.html?page=1";
+	}
 	
 }

@@ -26,8 +26,8 @@ public class Staff implements Serializable{
 	public String getLoginname() {
 		return Loginname;
 	}
-	public void setLoginname(String loginname) {
-		Loginname = loginname;
+	public void setLoginname(String Loginname) {
+		this.Loginname = Loginname;
 	}
 	public String getPassword() {
 		return password;

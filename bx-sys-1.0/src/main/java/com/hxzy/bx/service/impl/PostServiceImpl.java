@@ -58,4 +58,9 @@ public class PostServiceImpl implements PostService {
 		// TODO Auto-generated method stub
 		return postDao.getPost_names(depart_name);
 	}
+	@Override
+	public Post getPostByName(String post_name) {
+		// TODO Auto-generated method stub
+		return postDao.getPostByName(post_name);
+	}
 }

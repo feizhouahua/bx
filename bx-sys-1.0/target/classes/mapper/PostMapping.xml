@@ -13,19 +13,25 @@
 		select count(id) from t_post
 	</select>
 	<!-- 根据id查找对象 -->
-	<select id="getPostById" parameterType="java.lang.Integer" resultType="Post">
-		select id,post_name from t_post where id=#{id}
+	<select id="getPostById" parameterType="java.lang.Integer" resultMap="list">
+		select p.id,d.depart_name,p.post_name from t_post p,t_department d 
+		where d.id=p.depart_id and p.id=#{id}
 	</select>
 	
 	<!-- 根据depart_name 查找该部门的职务 -->
 	<select id="getPost_names" parameterType="java.lang.String" resultMap="list">
 		SELECT p.id,p.post_name FROM t_post p,(SELECT id FROM t_department WHERE depart_name=#{depart_name})  d WHERE d.id=p.depart_id;
-		
+	</select>
+	
+	<!-- 根据post_name查找对象 -->
+	<select id="getPostByName" parameterType="java.lang.String" resultMap="list">
+		select p.id,d.depart_name,p.post_name from t_post p,t_department d 
+		where d.id=p.depart_id and p.post_name=#{post_name}
 	</select>
 	
 	<!-- 添加 (可以先通过depart_name查询department表id再赋值给department  未实现)-->
 	<insert id="addPost" parameterType="Post">
-		insert into t_post values(#{department.id},#{post_name})
+		insert into t_post(depart_id,post_name) values(#{department.id},#{post_name})
 	</insert>
 	
 	<!-- 修改职务 (可以先通过depart_name查询department表id再赋值给department  未实现)-->
@@ -33,12 +39,13 @@
 		update t_post
 		<trim prefix="set" suffixOverrides=",">
 			<if test="department.id!=null">
-				 department.id=#{department.id},
+				 depart_id=#{department.id},
 			</if>
 			<if test="post_name!=null">
 				 post_name=#{post_name}
 			</if>
 		</trim>
+		where id=#{id}
 	</update>
 	
 	<resultMap type="Post" id="list">
