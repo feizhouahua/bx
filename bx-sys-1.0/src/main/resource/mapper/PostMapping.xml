@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxzy.bx.dao.PostDao">
+	<!-- 查询列表 (带分页) -->
+	<select id="getPosts" resultMap="list">
+		select p.id,d.depart_name,p.post_name from t_post p,t_department d 
+		where d.id=p.depart_id limit #{start},#{count}
+	</select>
+	<!-- 查询有多少条记录 -->
+	<select id="getCounts" resultType="java.lang.Integer">
+		select count(id) from t_post
+	</select>
+	<!-- 根据id查找对象 -->
+	<select id="getPostById" parameterType="java.lang.Integer" resultType="Post">
+		select id,post_name from t_post where id=#{id}
+	</select>
+	
+	<!-- 根据depart_name 查找该部门的职务 -->
+	<select id="getPost_names" parameterType="java.lang.String" resultMap="list">
+		SELECT p.id,p.post_name FROM t_post p,(SELECT id FROM t_department WHERE depart_name=#{depart_name})  d WHERE d.id=p.depart_id;
+		
+	</select>
+	
+	<!-- 添加 (可以先通过depart_name查询department表id再赋值给department  未实现)-->
+	<insert id="addPost" parameterType="Post">
+		insert into t_post values(#{department.id},#{post_name})
+	</insert>
+	
+	<!-- 修改职务 (可以先通过depart_name查询department表id再赋值给department  未实现)-->
+	<update id="updatePost" parameterType="Post">
+		update t_post
+		<trim prefix="set" suffixOverrides=",">
+			<if test="department.id!=null">
+				 department.id=#{department.id},
+			</if>
+			<if test="post_name!=null">
+				 post_name=#{post_name}
+			</if>
+		</trim>
+	</update>
+	
+	<resultMap type="Post" id="list">
+		<id column="id" property="id"/>
+		<result column="post_name" property="post_name"/>
+		<collection property="department" ofType="Department">
+			<id column="id" property="id"/>
+			<result column="depart_name" property="depart_name"/>
+		</collection>
+	</resultMap>
+</mapper>

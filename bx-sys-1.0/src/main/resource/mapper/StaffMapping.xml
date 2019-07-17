@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxzy.bx.dao.StaffDao">
+	<!-- 查询员工列表+分页 -->
+	<select id="getStaffs" resultMap="list">
+		SELECT s.id,s.staff_name,s.sex,s.entry_time,a.depart_name,a.post_name FROM t_staff s,
+		(SELECT p.id id,depart_name,post_name FROM t_post p,t_department d WHERE d.id=p.depart_id) a
+		WHERE s.post_id=a.id limit #{start},#{count}
+	</select>
+	
+	<!-- 高级查询+查询员工列表+分页 -->
+	<select id="getStaffsByCondition" parameterType="Staff" resultMap="list">
+		SELECT s.id,s.staff_name,s.sex,s.entry_time,a.depart_name,a.post_name FROM t_staff s,
+		(SELECT p.id id,depart_name,post_name FROM t_post p,t_department d WHERE d.id=p.depart_id) a
+		WHERE s.post_id=a.id limit #{start},#{count}
+	</select>
+	
+	<!-- 查询有多少条记录 -->
+	<select id="getCounts" resultType="java.lang.Integer">
+		select count(id) from t_staff
+	</select>
+	
+	<!-- 根据id查找对象 -->
+	<select id="getStaffById"  resultType="list">
+		SELECT s.id,s.staff_name,s.sex,s.entry_time,a.depart_name,a.post_name FROM t_staff s,
+		(SELECT p.id id,depart_name,post_name FROM t_post p,t_department d WHERE d.id=p.depart_id) a
+		WHERE s.post_id=a.id and s.id=#{id}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="addStaff" parameterType="Staff">
+		insert into t_staff(Loginname,password,staff_name,sex,post_id,entry_time)
+		values(#{Loginname},#{password},#{staff_name},#{sex},#{post.id},#{entry_time})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateStaff" parameterType="Staff">
+		update t_staff
+		<trim prefix="set" suffixOverrides=",">
+			<if test="Loginname!=null">
+				 Loginname=#{Loginname},
+			</if>
+			<if test="password!=null">
+				 password=#{password}
+			</if>
+			<if test="staff_name!=null">
+				staff_name=#{staff_name}
+			</if>
+			<if test="sex!=null">
+				sex=#{sex}
+			</if>
+			<if test="post.id !=null">
+				post_id=#{post.id}
+			</if>
+			<if test="entry_time !=null">
+				entry_time=#{entry_time}
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
+	
+	<resultMap type="Staff" id="list">
+		<id column="id" property="id"/>
+		<result column="Loginname" property="Loginname"/>
+		<result column="password" property="password"/>
+		<result column="entry_time" property="entry_time"/>
+		<result column="staff_name" property="staff_name"/>
+		<result column="sex" property="sex"/>
+		<collection property="post" ofType="Post">
+			<id column="id" property="id"/>
+			<result column="post_name" property="post_name"/>
+			<collection property="department" ofType="Department">
+				<id column="id" property="id"/>
+				<result column="depart_name" property="depart_name"/>
+			</collection>
+		</collection>
+	</resultMap>
+	
+	<!-- <resultMap type="Post" id="list1">
+		<id column="id" property="id"/>
+		<result column="depart_name" property="depart_name"/>
+	</resultMap>
+	
+	<resultMap type="Department" id="list1">
+		<id column="id" property="id"/>
+		<result column="depart_name" property="depart_name"/>
+	</resultMap> -->
+</mapper>
