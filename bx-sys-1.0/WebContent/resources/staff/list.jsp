@@ -25,7 +25,7 @@
 				<option>--请选择部门--</option>
 			</select>
 		职务：<select style="height: 25px" id="post" name="post_name">
-				<option>--请选择部职务-</option>
+				<option  id="one">--请选择部职务-</option>
 			</select>
 		姓名：<input type="text" name="staff_name"/>
 		<input type="submit" value="高级查询"/>
@@ -68,7 +68,6 @@
 <script type="text/javascript">
 	$(function(){
 		var depart="";
-		var post="";
 		$.ajax({
 			url:"./ajax/depart.html",
 			type:"get",
@@ -86,20 +85,22 @@
 			},
 		});
 	});
-	$("#post option").empty();
+	
 	$("#depart").change(function(){
-		
+		$(".op").remove();
+		var post="";
 		var depart_name=$('#depart').val();
-		alert(depart_name);
+		//alert(depart_name);
 		$.ajax({
 			url:"./ajax/post.html?depart_name="+depart_name,
 			type:"get",
 			dataType:"json",
+			cache:false,
 			success:function(postobj){
+				//alert(postobj);
 				$(postobj).each(function(i,p){
-					post+="<option>"+postobj[i].post_name+"</option>";
-				});
-				//postobj.delete();
+					post+="<option class='op'>"+postobj[i].post_name+"</option>";
+				});	
 				$("#post option").after(post);
 			},
 			error:function(){
@@ -107,7 +108,6 @@
 			},
 		});
 	});
-	
 	
 </script>
 </body>

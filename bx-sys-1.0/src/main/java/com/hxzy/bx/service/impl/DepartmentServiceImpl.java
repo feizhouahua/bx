@@ -57,5 +57,10 @@ public class DepartmentServiceImpl implements DepartmentService{
 		// TODO Auto-generated method stub
 		return departmentDao.getDepart_names();
 	}
+	@Override
+	public Department getDepartmentByName(String depart_name) {
+		// TODO Auto-generated method stub
+		return departmentDao.getDepartmentByName(depart_name);
+	}
 	
 }

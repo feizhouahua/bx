@@ -16,6 +16,11 @@
 		select id,depart_name from t_department where id=#{id}
 	</select>
 	
+	<!-- 根据depart_name查找对象 -->
+	<select id="getDepartmentByName" parameterType="java.lang.String" resultType="Department">
+		select id,depart_name from t_department where depart_name=#{depart_name}
+	</select>
+	
 	<!-- 查询所有部门 -->
 	<select id="getDepart_names" resultMap="list">
 		select depart_name from t_department

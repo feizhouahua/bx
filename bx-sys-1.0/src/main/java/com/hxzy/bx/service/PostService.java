@@ -27,4 +27,7 @@ public interface PostService {
 		
 		//根据depart_name 查找该部门的职务
 		public List<Post> getPost_names(String depart_name);
+		
+		//根据post_name查找对象
+		public Post getPostByName(String post_name);
 }

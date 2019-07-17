@@ -40,7 +40,7 @@ public class DepartmentController {
 	@RequestMapping("resources/department/add")
 	public String add(@ModelAttribute Department department) throws UnsupportedEncodingException {
 		System.out.println(department.getDepart_name());
-		department.setDepart_name(new String(department.getDepart_name().getBytes("iso-8859-1"),"utf-8"));
+		//department.setDepart_name(new String(department.getDepart_name().getBytes("iso-8859-1"),"utf-8"));
 		departmentService.addDepartment(department);
 		return "redirect:list.html?page=1";
 	}
@@ -54,11 +54,10 @@ public class DepartmentController {
 	
 	@RequestMapping("resources/department/updateb")
 	public String updateb(@ModelAttribute Department department) throws UnsupportedEncodingException {
-		department.setDepart_name(new String(department.getDepart_name().getBytes("iso-8859-1"),"utf-8"));
+		//department.setDepart_name(new String(department.getDepart_name().getBytes("iso-8859-1"),"utf-8"));
 		departmentService.updateDepartment(department);
 		return "redirect:list.html?page=1";
 	}
-	
 	
 	
 }

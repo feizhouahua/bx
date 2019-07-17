@@ -10,6 +10,7 @@
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="../../css/dashboard.css" rel="stylesheet">
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 	#ahref{
 		float: right;
@@ -34,7 +35,7 @@
 					<td>${post.id}</td>
 					<td colspan="2">${post.department.depart_name}</td>
 					<td colspan="2">${post.post_name}</td>
-					<td><a href="updatea.html?id=${department.id}"><img
+					<td><a href="updatea.html?id=${post.id}"><img
 							src="../images/bianji.png"></a></td>
 				</tr>
 			</c:forEach>
