@@ -3,5 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.TrackDao">
-	
+  <!-- 添加跟踪 -->
+	<insert id="inserttrack" parameterType="com.hxzy.bx.entity.Track">
+		insert into t_track (refer_id,content,time,consultants) 
+				values (#{id},#{content},#{time},#{consultants})
+	</insert>
 </mapper>

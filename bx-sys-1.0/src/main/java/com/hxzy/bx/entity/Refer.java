@@ -13,11 +13,13 @@ public class Refer implements Serializable{
 	private String refername;
 	private String tel;
 	private String QQ;
-	private String Intention_level;
+	private String intention_level;
 	private String source;
 	private String remarks;
 	private String state;
 	private String marketer;
+	private String intention_subject;
+	private String intention_class;
 	public Integer getId() {
 		return id;
 	}
@@ -41,12 +43,6 @@ public class Refer implements Serializable{
 	}
 	public void setQQ(String qQ) {
 		QQ = qQ;
-	}
-	public String getIntention_level() {
-		return Intention_level;
-	}
-	public void setIntention_level(String intention_level) {
-		Intention_level = intention_level;
 	}
 	public String getSource() {
 		return source;
@@ -72,6 +68,27 @@ public class Refer implements Serializable{
 	public void setMarketer(String marketer) {
 		this.marketer = marketer;
 	}
+	public String getIntention_level() {
+		return intention_level;
+	}
+	public void setIntention_level(String intention_level) {
+		this.intention_level = intention_level;
+	}
+	public String getIntention_subject() {
+		return intention_subject;
+	}
+	public void setIntention_subject(String intention_subject) {
+		this.intention_subject = intention_subject;
+	}
+	public String getIntention_class() {
+		return intention_class;
+	}
+	public void setIntention_class(String intention_class) {
+		this.intention_class = intention_class;
+	}
+
+	
+	
 	
 	
 }

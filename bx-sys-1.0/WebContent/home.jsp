@@ -36,7 +36,7 @@
 						咨询部<img src="./images/more.png">
 					</dt>
 					<dd class="first_dd">
-						<a href="#">咨询学生管理</a>
+						<a href="refer/referStu/into.html">咨询学生管理</a>
 					</dd>
 					<dd>
 						<a href="#">查询学生报名</a>

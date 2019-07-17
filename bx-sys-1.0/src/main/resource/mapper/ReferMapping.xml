@@ -3,5 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.ReferDao">
-	
+<select id="getRefer" resultType="com.hxzy.bx.entity.Refer">
+	select id,refername,tel,QQ,Intention_level,state,marketer,Intention_class,Intention_subject  
+			from t_refer where refername like "%"#{text}"%" or tel like "%"#{text}"%" or QQ like "%"#{text}"%"
+</select>
+<select id="getRefers" resultType="com.hxzy.bx.entity.Refer">
+	select id,refername,tel,QQ,Intention_level,state,marketer,Intention_class,Intention_subject 
+			from t_refer
+</select>
+<select id="chakan" resultType="com.hxzy.bx.entity.Refer">
+	select id,refername,tel,QQ,Intention_level,state,marketer,source,remarks,Intention_subject,Intention_class
+			from t_refer where id = #{id }
+</select>
+
+<update id="uprefer" parameterType="com.hxzy.bx.entity.Refer">
+	update t_refer set
+	  	refername = #{refername},tel = #{tel},QQ = #{QQ},Intention_level = #{intention_level},
+	  	Intention_class = #{intention_class},Intention_subject = #{intention_subject},remarks = #{remarks},
+	  	source = #{source}
+	  	where id = #{id}
+</update>
 </mapper>
