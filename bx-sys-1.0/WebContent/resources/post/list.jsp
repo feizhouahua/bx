@@ -15,11 +15,16 @@
 	#ahref{
 		float: right;
 	}
+	.table.table-striped{
+		height: 240px;
+		margin-top: 60px;
+	}
 </style>
 </head>
 <body>
-	<span>[职务管理]</span>
-	<a id="ahref" href="add.jsp">添加</a>
+	<span style="font-size: 20px;font-weight: bolder;">[职务管理]</span>
+	<a id="ahref" class="btn btn-sm btn-primary" href="add.jsp">添加</a>
+	<br><br>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -39,17 +44,13 @@
 							src="../images/bianji.png"></a></td>
 				</tr>
 			</c:forEach>
-			<tr>
-				<td colspan="6">
-				<div id="ahref">
-				<a href="list.html?page=1">首页</a> 
-				<a href="list.html?page=${page>1?page-1:1}">上一页</a>
-				<a href="list.html?page=${page<pages?page+1:pages}">下一页</a>
-			    <a href="list.html?page=${pages}">末页</a></div></td>
-			</tr>
 		</tbody>
 	</table>
-
-
+	<div id="ahref" style="margin-top: 20px;">
+		<a class="btn btn-xs btn-info" href="list.html?page=1">首页</a> 
+		<a class="btn btn-xs btn-info" href="list.html?page=${page>1?page-1:1}">上一页</a>
+		<a class="btn btn-xs btn-info" href="list.html?page=${page<pages?page+1:pages}">下一页</a>
+		<a class="btn btn-xs btn-info" href="list.html?page=${pages}">末页</a>
+	</div>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +43,7 @@ public class StaffController {
 	}
 	
 
-	@RequestMapping("resources/staff/list")
+	//@RequestMapping("resources/staff/list")
 	public String list(@RequestParam int page,Model model) {
 		if(page==0) {
 			page=1;
@@ -98,8 +99,55 @@ public class StaffController {
 	public String updateb(@ModelAttribute Staff staff,Post post) {
 		Post p=postService.getPostByName(post.getPost_name());
 		staff.setPost(p);
-		staffService.addStaff(staff);
+		staffService.updateStaff(staff);
 		return "redirect:list.html?page=1";
+	}
+	
+	@RequestMapping("resources/staff/list")
+	public String advanced(@RequestParam(value="page") int page,@ModelAttribute Staff staff,Post post,Department department,Model model,HttpSession session) {
+		System.out.println(staff);
+		Post p=postService.getPostByName(post.getPost_name());
+		Department d=departmentService.getDepartmentByName(department.getDepart_name());
+		Staff s=null;
+		if(d!=null) {
+			model.addAttribute("depart", d);
+			p.setDepartment(d);
+		}
+		if(p!=null) {			
+			model.addAttribute("postname", p);
+			staff.setPost(p);
+		}
+		if(staff.getStaff_name()!=null) {
+			//model.addAttribute("staffname", staff);
+			session.setAttribute("staffname", staff);
+			//System.out.println("!=============null"+staff.getStaff_name());
+		}
+		if (staff.getStaff_name()==null) {
+			s=(Staff) session.getAttribute("staffname");
+			//System.out.println("=============null"+staff.getStaff_name());
+		}else {
+			s=staff;
+		}
+		
+		if(page==0) {
+			page=1;
+		}
+		int pagecount=5;//每页显示5条记录		
+		//int pages=staffService.getPages(pagecount);//获得页数
+		
+		List<Staff> staffs=staffService.getStaffsByCondition(s,(page-1)*pagecount, pagecount);
+		int pages=0;//获得页数
+		int counts=staffService.getStaffsByConditionCounts(s);
+		if(counts%pagecount==0) {
+			pages=counts/pagecount;
+		}else {
+			pages=counts/pagecount+1;
+		}
+		System.out.println(pages+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		model.addAttribute("staffs", staffs);
+		model.addAttribute("page", page);
+		model.addAttribute("pages", pages);
+		return "list";
 	}
 	
 }

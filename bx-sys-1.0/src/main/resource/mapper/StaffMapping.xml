@@ -11,10 +11,51 @@
 	</select>
 	
 	<!-- 高级查询+查询员工列表+分页 -->
-	<select id="getStaffsByCondition" parameterType="Staff" resultMap="list">
+	<select id="getStaffsByCondition" resultMap="list">
 		SELECT s.id,s.staff_name,s.sex,s.entry_time,a.depart_name,a.post_name FROM t_staff s,
-		(SELECT p.id id,depart_name,post_name FROM t_post p,t_department d WHERE d.id=p.depart_id) a
-		WHERE s.post_id=a.id limit #{start},#{count}
+		(SELECT p.id pid,d.id did,depart_name,post_name FROM t_post p,t_department d WHERE d.id=p.depart_id) a
+		WHERE s.post_id=a.pid
+		<if test="staff!=null">
+			<if test="staff.post != null">
+				<if test="staff.post.post_name !=null">
+					and	a.post_name=#{staff.post.post_name}
+				</if>
+				<if test="staff.post.department!=null">
+					<if test="staff.post.department.depart_name !=null">
+						and a.depart_name=#{staff.post.department.depart_name}
+					</if>
+				</if>
+			</if>
+			<if test="staff.staff_name !=null">
+				<!-- and staff_name like '%#{staff.staff_name}%' -->
+				and staff_name like CONCAT('%',#{staff.staff_name},'%')
+			</if>
+		</if>
+		 limit #{start},#{count}
+	</select>
+	
+	<!-- //查询条件查询有多少条记录
+	public int getStaffsByConditionCounts(Staff staff); -->
+	<select id="getStaffsByConditionCounts" resultType="java.lang.Integer">
+		SELECT count(*) FROM t_staff s,
+		(SELECT p.id pid,d.id did,depart_name,post_name FROM t_post p,t_department d WHERE d.id=p.depart_id) a
+		WHERE s.post_id=a.pid
+		<if test="staff!=null">
+			<if test="staff.post!=null">
+				<if test="staff.post.post_name !=null">
+					and	a.post_name=#{staff.post.post_name}
+				</if>
+				<if test="staff.post.department!=null">
+					<if test="staff.post.department.depart_name !=null">
+						and a.depart_name=#{staff.post.department.depart_name}
+					</if>
+				</if>
+			</if>
+			<if test="staff.staff_name !=null">
+				<!-- and staff_name like '%#{staff.staff_name}%' -->
+				and staff_name like CONCAT('%',#{staff.staff_name},'%')
+		 	</if>
+		</if>
 	</select>
 	
 	<!-- 查询有多少条记录 -->
@@ -43,19 +84,19 @@
 				 Loginname=#{Loginname},
 			</if>
 			<if test="password!=null">
-				 password=#{password}
+				 password=#{password},
 			</if>
 			<if test="staff_name!=null">
-				staff_name=#{staff_name}
+				staff_name=#{staff_name},
 			</if>
 			<if test="sex!=null">
-				sex=#{sex}
+				sex=#{sex},
 			</if>
 			<if test="post.id !=null">
-				post_id=#{post.id}
+				post_id=#{post.id},
 			</if>
 			<if test="entry_time !=null">
-				entry_time=#{entry_time}
+				entry_time=#{entry_time},
 			</if>
 		</trim>
 		where id=#{id}

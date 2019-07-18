@@ -14,6 +14,9 @@ public interface StaffService {
 		//高级查询+查询员工列表+分页
 		public List<Staff> getStaffsByCondition(Staff staff,int start,int count);
 		
+		//查询条件查询有多少条记录
+		public int getStaffsByConditionCounts(Staff staff);
+		
 		//添加
 		public void addStaff(Staff staff);
 		

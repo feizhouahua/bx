@@ -12,24 +12,31 @@
 <link href="../../css/dashboard.css" rel="stylesheet">
 <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 <style type="text/css">
-	#ahref{
+	#right{
 		float: right;
+	}
+	.table.table-striped{
+		height: 240px;
 	}
 </style>
 </head>
 <body>
-	<span>[员工管理]</span>
-	<a id="ahref" href="add.jsp">添加</a>
-	<form action="">
-		部门：<select style="height: 25px" id="depart" name="depart_name">
-				<option>--请选择部门--</option>
-			</select>
-		职务：<select style="height: 25px" id="post" name="post_name">
-				<option  id="one">--请选择部职务-</option>
-			</select>
-		姓名：<input type="text" name="staff_name"/>
-		<input type="submit" value="高级查询"/>
-	</form>
+	<div>
+	  <form action="list.html?page=1" method="post">	
+		<span style="font-size: 20px;font-weight: bolder;">[员工管理]</span>
+			<div id="right"><input class="btn btn-sm btn-primary" type="submit" value="高级查询"/>&nbsp;<a class="btn btn-sm btn-primary" href="add.jsp">添加</a></div>
+		<br><br>
+			部门：<select style="height: 25px" id="depart" name="depart_name">
+					<option>--请选择部门--</option>
+				</select>
+			职务：<select style="height: 25px" id="post" name="post_name">
+					<option  id="one">--请选择部职务-</option>
+				</select>
+			姓名：<input type="text" name="staff_name"/>
+		
+	   </form>
+	</div>
+	<br><br>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -55,16 +62,14 @@
 							src="../images/bianji.png"></a></td>
 				</tr>
 			</c:forEach>
-			<tr>
-				<td colspan="7">
-				<div id="ahref">
-				<a href="list.html?page=1">首页</a> 
-				<a href="list.html?page=${page>1?page-1:1}">上一页</a>
-				<a href="list.html?page=${page<pages?page+1:pages}">下一页</a>
-			    <a href="list.html?page=${pages}">末页</a></div></td>
-			</tr>
 		</tbody>
 	</table>
+	<div id="right" style="margin-top: 20px;">
+		<a class="btn btn-xs btn-info" href="list.html?page=1">首页</a> 
+		<a class="btn btn-xs btn-info" href="list.html?page=${page>1?page-1:1}">上一页</a>
+		<a class="btn btn-xs btn-info" href="list.html?page=${page<pages?page+1:pages}">下一页</a>
+		<a class="btn btn-xs btn-info" href="list.html?page=${pages}">末页</a>
+	</div>
 <script type="text/javascript">
 	$(function(){
 		var depart="";

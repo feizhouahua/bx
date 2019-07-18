@@ -5,11 +5,13 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
+	
 }
 #navbar ul li span,a,.navbar-header span{
 	color: white;
 	font-size: 15px;
 	padding-top: 15px;
+	margin-top:50px;
 	display: inline-block;
 }
 html, body {
@@ -68,7 +70,7 @@ a {
 }
 
 .leftsidebar_box dd {
-	background-color: #317eb4;
+	background-color: #87CEFA;
 	padding-left: 40px;
 }
 

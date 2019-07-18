@@ -8,7 +8,34 @@
 <link href="./css/home.css" rel="stylesheet"/>
 <!-- Bootstrap core CSS -->
 <link href="./css/bootstrap.min.css" rel="stylesheet">
-
+<style type="text/css">
+	.navbar.navbar-inverse.navbar-fixed-top{
+		background-color:rgb(51,122,183);
+		height: 80px;
+	}
+	.leftsidebar_box{
+		background-color: #4F4F4F;
+		padding-top: 30px;
+	}
+	#navbar ul li span,a{
+		color: white;
+		font-size: 15px;
+		margin-top:15px;
+		display: inline-block;
+	}
+	#titlename{
+		margin-top:5px;
+		font-size: 25px;
+		font-weight: bolder;
+	}
+	.nav.navbar-nav.navbar-right li{
+		padding-right: 20px;
+	}
+	.nav.navbar-nav.navbar-right li a{
+		color: white;
+	}
+	
+</style>
 </head>
 <body>
 <body>
@@ -16,10 +43,12 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<span>今天是：</span><span id="times"></span>
+				<img alt="" src="./images/tupibao.png">
+				<span id="titlename">补习学校后台管理系统</span>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
+					<li><span>今天是：</span><span id="times"></span></li>
 					<li><span>欢迎您:${loginUser.username}</span></li>
 					<li><a href="#">更改密码</a></li>
 					<li><a href="#">重新登录</a></li>
@@ -108,7 +137,7 @@
 	<script type="text/javascript" src="./js/jquery.js"></script>
 	<script type="text/javascript">
 		$(".leftsidebar_box dt").css({
-			"background-color" : "#3992d0"
+			"background-color" : "#4F4F4F"
 		});
 		$(".leftsidebar_box dt img").attr("src", "./images/more.png");
 		$(function() {
@@ -116,10 +145,10 @@
 			$(".leftsidebar_box dt").click(
 					function() {
 						$(".leftsidebar_box dt").css({
-							"background-color" : "#3992d0"
+							"background-color" : "#4F4F4F"
 						})
 						$(this).css({
-							"background-color" : "#317eb4"
+							"background-color" : "rgb(51,122,183)"
 						});
 						$(this).parent().find('dd').removeClass("menu_chioce");
 						$(".leftsidebar_box dt img").attr("src",

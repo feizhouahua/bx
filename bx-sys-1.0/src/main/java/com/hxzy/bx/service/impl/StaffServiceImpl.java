@@ -58,5 +58,10 @@ public class StaffServiceImpl implements StaffService {
 		}
 
 	}
+	@Override
+	public int getStaffsByConditionCounts(Staff staff) {
+		// TODO Auto-generated method stub
+		return staffDao.getStaffsByConditionCounts(staff);
+	}
 	
 }
