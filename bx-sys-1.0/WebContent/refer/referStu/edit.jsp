@@ -56,7 +56,6 @@ for(var i=0;i<level.length;i++){
 			level[i].selected=true;
 		}
 }
-alert(1)
 var cla = $("#class>option");
 for(var i=0;i<cla.length;i++){
 	var num = cla[i].value
@@ -64,7 +63,6 @@ for(var i=0;i<cla.length;i++){
 			cla[i].selected=true;
 		}
 }
-alert(2)
 var subject = $("#subject>option");
 for(var i=0;i<subject.length;i++){
 	var num = subject[i].value
@@ -72,7 +70,6 @@ for(var i=0;i<subject.length;i++){
 			subject[i].selected=true;
 		}
 }
-alert(3)
 var source = $("#source>option");
 for(var i=0;i<source.length;i++){
 	var num = source[i].value

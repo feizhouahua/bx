@@ -1,5 +1,6 @@
 package com.hxzy.bx.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hxzy.bx.entity.Refer;
+import com.hxzy.bx.entity.Student;
 import com.hxzy.bx.service.ReferService;
+import com.mysql.cj.Session;
 
 @Controller
 public class ReferController {
@@ -26,9 +29,7 @@ public class ReferController {
 	
 	@RequestMapping("refer/referStu/hei")
 	public String in() {
-		System.out.println(1);
 		return "redirect:into.html";
-		
 	}
 	
 	@RequestMapping("refer/referStu/into")
@@ -41,7 +42,6 @@ public class ReferController {
 	@RequestMapping(method = RequestMethod.POST, value="/select3")
 	public String getRefer(@ModelAttribute String txt,HttpSession session) {
 		List<Refer> refers = referService.getRefer(txt);
-		System.out.println(refers.get(0).getQQ());
 		session.setAttribute("refer", refers);
 		return "table";
 	}
@@ -55,7 +55,6 @@ public class ReferController {
 	
 	@RequestMapping("refer/referStu/genzong" )
 	public String genzong(@RequestParam Integer id,HttpSession session) {
-		System.out.println("根直径");
 		Refer refer = referService.chakan(id);
 		session.setAttribute("refer", refer);
 		return "trackadd";
@@ -70,8 +69,36 @@ public class ReferController {
 	
 	@RequestMapping("refer/referStu/upup" )
 	public String xiug(@ModelAttribute Refer refer) {
-		System.out.println(1);
 		referService.uprefer(refer);
 		return "redirect:into.html";
+	}
+	
+	@RequestMapping("refer/referStu/enter" )
+	public String enter(@RequestParam Integer id,HttpSession session) {
+		Refer refer = referService.chakan(id);
+		session.setAttribute("refered", refer);
+		return "enters";
+	}
+	
+	@RequestMapping("refer/referStu/referadd")
+	public String referadd(@ModelAttribute Student student,HttpSession session) {
+		session.setAttribute("referstu", student);
+		return "redirect:../../stu_depart/stu_manage/addstu.jsp";
+	}
+	
+	@RequestMapping("queryStu")
+	public String queryStu(HttpSession session) {
+		System.out.println(123);
+		List<Refer> refers = new ArrayList<Refer>();
+		refers = referService.queryStu();
+		session.setAttribute("queryStu", refers);
+		return "redirect:refer/queryStu/query.jsp";
+	}
+	
+	@RequestMapping("refer/queryStu/queryref" )
+	public String check(@RequestParam Integer id,HttpSession session) {
+		Refer refer = referService.chakan(id);
+		session.setAttribute("qrefer", refer);
+		return "check";
 	}
 }

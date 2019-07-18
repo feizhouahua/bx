@@ -38,5 +38,10 @@ public class ReferServiceImpl implements ReferService {
 		// TODO Auto-generated method stub
 		referDao.uprefer(refer);
 	}
+	@Override
+	public List<Refer> queryStu() {
+		// TODO Auto-generated method stub
+		return referDao.queryStu();
+	}
 	
 }

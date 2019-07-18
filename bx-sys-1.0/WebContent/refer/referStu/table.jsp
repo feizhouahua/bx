@@ -30,13 +30,13 @@
 			<td>${w.refername }</td>
 			<td>${w.tel }</td>
 			<td>${w.QQ }</td>
-			<td>${w.intention_level }</td>
+			<td>${w.intention_subject }/${w.intention_class }</td>
 			<td>${w.state }</td>
 			<td>${w.marketer }</td>
 			<td><a href="chakan.html?id=${w.id}">查看</a></td>
 			<td><a href="xiugai.html?id=${w.id}">编辑</a></td>
 			<td><a href="genzong.html?id=${w.id}">跟踪</a></td>
-			<td><a href="chakan.html?id=${w.id}">录入学籍</a></td>
+			<td><a href="enter.html?id=${w.id}">录入学籍</a></td>
 		</tr>
 	</c:forEach>
 </table>

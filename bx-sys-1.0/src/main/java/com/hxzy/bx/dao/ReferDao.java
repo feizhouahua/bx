@@ -16,4 +16,7 @@ public interface ReferDao {
 	
 	//编辑咨询学生
 	public void uprefer(Refer refer);
+	
+	//查询已报名学员
+	public List<Refer> queryStu();
 }
