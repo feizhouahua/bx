@@ -71,6 +71,16 @@
 		<a class="btn btn-xs btn-info" href="list.html?page=${pages}">末页</a>
 	</div>
 <script type="text/javascript">
+
+	var table=$("table tr").length;
+	if(table<6){
+		for(var i = 1; i<=(6-table);i++){
+			$("table tr:last")
+			.after("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><tr>");
+		}
+			
+	}
+	
 	$(function(){
 		var depart="";
 		$.ajax({

@@ -10,6 +10,7 @@
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="../../css/dashboard.css" rel="stylesheet">
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 	#ahref{
 		float: right;
@@ -48,6 +49,15 @@
 		<a class="btn btn-xs btn-info" href="list.html?page=${page<pages?page+1:pages}">下一页</a>
 		<a class="btn btn-xs btn-info" href="list.html?page=${pages}">末页</a>
 	</div>
-
 </body>
+<script type="text/javascript">
+	var table=$("table tr").length;
+	if(table<6){
+		for(var i = 1; i<=(6-table);i++){
+			$("table tr:last")
+			.after("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><tr>");
+		}
+		
+	}
+</script>
 </html>

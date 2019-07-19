@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>更改部门</title>
+<title>更改密码</title>
 <!-- Bootstrap core CSS -->
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
@@ -23,15 +23,27 @@
 </head>
 <body>
 <form action="updateb.html" method="post">
-<span style="font-size: 20px;font-weight: bolder;">[部门管理]</span>
-<input id="ahref" class="btn btn-sm btn-primary" type="submit" value="保存"/>
+<span style="font-size: 20px;font-weight: bolder;">[更改密码]</span>
+<input id="ahref" class="btn btn-sm btn-primary" type="submit" value="修改"/>
 <input id="ahref" class="btn btn-sm btn-primary" onclick="history.go(-1)" type="button" value="返回">
 <table>
 	<tr>
-		<td>部门名称:</td>
+		<td>原始密码:</td>
 		<td>
-			<input type="hidden" name="id" value="${department.id}"/>
-			<input type="text" name="depart_name" value="${department.depart_name}"/>
+			<input type="hidden" name="id" value="${sessionScope.loginUser.id}"/>
+			<input type="text" name="password"/>
+		</td>
+	</tr>
+	<tr>
+		<td>新密码:</td>
+		<td>
+			<input type="text" name="newpassword"/>
+		</td>
+	</tr>
+	<tr>
+		<td>确认密码:</td>
+		<td>
+			<input type="text" name="oknewpassword"/>
 		</td>
 	</tr>
 </table>
