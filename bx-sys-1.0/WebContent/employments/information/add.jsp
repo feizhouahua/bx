@@ -9,6 +9,8 @@
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="../../css/dashboard.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="../../css/jedate.css">
+<script type="text/javascript" src="../../js/jedate.js"></script>
 <style type="text/css">
 	#ahref{
 		float: right;
@@ -85,7 +87,7 @@
 	</tr>
 	<tr>
 		<td>入职时间:</td>
-		<td><input type="date" name="Entry_time"/></td>
+		<td><input type="text" name="Entry_time" class="jeinput" id="test04" placeholder="YYYY-MM-DD hh:mm:ss"></td>
 	</tr>
 	<tr>
 		<td>
@@ -137,6 +139,18 @@
 				alert("ajax请求失败!");
 			}
 		});
+	});
+	
+	jeDate("#test04",{
+	    festival:true,
+	    minDate:"1900-01-01",              //最小日期
+	    maxDate:"2099-12-31",              //最大日期
+	    method:{
+	        choose:function (params) {
+	            
+	        }
+	    },
+	    format: "YYYY-MM-DD hh:mm:ss"
 	});
 </script>
 </html>
