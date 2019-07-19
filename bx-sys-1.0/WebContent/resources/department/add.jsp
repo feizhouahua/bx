@@ -17,6 +17,9 @@
 	table{
 		margin: 0px auto; 
 		margin-top: 50px;
+	}
+	table tr td:nth-child(odd){
+		padding-left:10px;
 		font-weight: bolder;
 	}
 </style>

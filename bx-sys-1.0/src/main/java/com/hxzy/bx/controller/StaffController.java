@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hxzy.bx.entity.Department;
 import com.hxzy.bx.entity.Post;
 import com.hxzy.bx.entity.Staff;
+import com.hxzy.bx.entity.User;
 import com.hxzy.bx.service.DepartmentService;
 import com.hxzy.bx.service.PostService;
 import com.hxzy.bx.service.StaffService;
+import com.hxzy.bx.service.UserService;
+
 import net.sf.json.JSONArray;
 
 @Controller
@@ -42,6 +45,11 @@ public class StaffController {
 		this.postService = postService;
 	}
 	
+	@Resource(name="userServiceImpl")
+	private UserService userService;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 
 	//@RequestMapping("resources/staff/list")
 	public String list(@RequestParam int page,Model model) {
@@ -83,6 +91,12 @@ public class StaffController {
 	public String add(@ModelAttribute Staff staff,Post post) {
 		Post p=postService.getPostByName(post.getPost_name());
 		staff.setPost(p);
+		//添加员工的同时也向user表添加登录名和密码
+		User user=new User();
+		user.setUsername(staff.getLoginname());
+		user.setPassword(staff.getPassword());
+		userService.addUser(user);
+		
 		staffService.addStaff(staff);
 		return "redirect:list.html?page=1";
 	}
@@ -120,11 +134,9 @@ public class StaffController {
 		if(staff.getStaff_name()!=null) {
 			//model.addAttribute("staffname", staff);
 			session.setAttribute("staffname", staff);
-			//System.out.println("!=============null"+staff.getStaff_name());
 		}
 		if (staff.getStaff_name()==null) {
 			s=(Staff) session.getAttribute("staffname");
-			//System.out.println("=============null"+staff.getStaff_name());
 		}else {
 			s=staff;
 		}
@@ -143,7 +155,6 @@ public class StaffController {
 		}else {
 			pages=counts/pagecount+1;
 		}
-		System.out.println(pages+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		model.addAttribute("staffs", staffs);
 		model.addAttribute("page", page);
 		model.addAttribute("pages", pages);

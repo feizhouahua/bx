@@ -3,5 +3,49 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.InformationDao">
+	<!-- 查询就业信息列表集合 -->
+	<select id="getInformations" resultType="Information">
+		select id,student_name,class_name,employment_company,salary,post,Entry_time,description from t_information
+	</select>
+	
+	<!-- 查询有多少条记录 -->
+	<select id="getCounts" resultType="java.lang.Integer">
+		select count(*) from t_information
+	</select>
+	
+	<!-- //根据id查找Information对象  -->
+	<select id="getInformationById" parameterType="java.lang.Integer" resultType="Information">
+		select id,student_name,class_name,employment_company,salary,post,Entry_time,description from t_information
+		where id=#{id}
+	</select>
+	
+	<!-- 根据id修改就业信息Information -->
+	<update id="updateInformation" parameterType="Information">
+		update t_information
+		<trim prefix="set" suffixOverrides=",">
+			<if test="employment_company!=null">
+				 employment_company=#{employment_company},
+			</if>
+			<if test="salary!=null">
+				 salary=#{salary},
+			</if>
+			<if test="post!=null">
+				post=#{post},
+			</if>
+			<if test="entry_time!=null">
+				Entry_time=#{entry_time},
+			</if>
+			<if test="description !=null">
+				description=#{description},
+			</if>
+		</trim>
+		where id=#{id}
+		
+	</update>
+	
+	<!-- 添加就业信息 -->
+	<insert id="addInformation" parameterType="Information">
+		insert into t_information(student_name,class_name,employment_company,salary,post,Entry_time,description) values(#{student_name},#{class_name},#{employment_company},#{salary},#{post},#{entry_time},#{description})
+	</insert>
 	
 </mapper>

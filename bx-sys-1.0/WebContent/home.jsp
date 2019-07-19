@@ -104,7 +104,7 @@
 						就业部<img src="./images/more.png">
 					</dt>
 					<dd class="first_dd">
-						<a href="#">就业情况</a>
+						<a href="employments/information/list.html?page=1" target="nl">就业情况</a>
 					</dd>
 				</dl>
 
