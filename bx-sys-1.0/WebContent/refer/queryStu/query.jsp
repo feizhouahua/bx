@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" />
 </head>
 <body>
-<table border="1">
+<table  class="table table-hover">
 <tr>
 <td>姓名</td>
 <td>电话</td>
@@ -29,6 +30,12 @@
 			<td><a href="queryref.html?id=${w.id}">查看</a></td>
 		</tr>
 	</c:forEach>
+	<tr>
+	<td><a href="queryStu.html?pag=0">首页</a></td>
+	<td><a href="queryStu.html?pag=${pag-1<1 ? 0 : pag-1}">上一页</a></td>
+	<td><a href="queryStu.html?pag=${pag+1 > numq-1  ? numq-1 : pag+1 }">下一页</a></td>
+	<td><a href="queryStu.html?pag=${numq }">尾页</a></td>
+	</tr>
 </table>
 </body>
 </html>

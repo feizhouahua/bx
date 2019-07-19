@@ -3,19 +3,36 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.ReferDao">
+<!-- 模糊查询咨询人信息 -->
 <select id="getRefer" resultType="com.hxzy.bx.entity.Refer">
 	select id,refername,tel,QQ,Intention_level,state,marketer,Intention_class,Intention_subject 
 			from t_refer where refername like "%"#{text}"%" or tel like "%"#{text}"%" or QQ like "%"#{text}"%"
+			limit #{start},#{count}
 </select>
-<select id="getRefers" resultType="com.hxzy.bx.entity.Refer">
+<!-- 查询数量 -->
+<select id="getRefernum" resultType="Integer">
+	select count(1) 
+			from t_refer 
+			where refername like "%"#{text}"%" or tel like "%"#{text}"%" or QQ like "%"#{text}"%"
+			
+</select>
+<!-- 查询咨询人信息 -->
+<!-- <select id="getRefers" resultType="com.hxzy.bx.entity.Refer">
 	select id,refername,tel,QQ,Intention_level,state,marketer,Intention_class,Intention_subject
-			from t_refer
+			from t_refer limit #{start},#{count}
 </select>
+
+<select id="getRefersnum" resultType="Integer">
+	select count(1) from t_refer
+</select> -->
+
+<!-- 通过ID查询咨询人 -->
 <select id="chakan" resultType="com.hxzy.bx.entity.Refer">
 	select id,refername,tel,QQ,Intention_level,state,marketer,source,remarks,Intention_subject,Intention_class
 			from t_refer where id = #{id }
 </select>
 
+<!-- 通过ID编辑咨询人 -->
 <update id="uprefer" parameterType="com.hxzy.bx.entity.Refer">
 	update t_refer set
 	  	refername = #{refername},tel = #{tel},QQ = #{QQ},Intention_level = #{intention_level},
@@ -24,8 +41,13 @@
 	  	where id = #{id}
 </update>
 
+<!-- 查询已报名的咨询学生 -->
 <select id="queryStu" resultType="com.hxzy.bx.entity.Refer">
 	select id,refername,tel,QQ,Intention_level,state,marketer,Intention_class,Intention_subject
-			from t_refer where  state = "已报名"
+			from t_refer where  state = "已报名" limit #{start},#{count}
+</select>
+
+<select id="queryStunum" resultType="Integer">
+	select count(1) from t_refer where  state = "已报名"
 </select>
 </mapper>

@@ -19,14 +19,14 @@ public class ReferServiceImpl implements ReferService {
 		this.referDao = referDao;
 	}
 	@Override
-	public List<Refer> getRefer(String text) {
+	public List<Refer> getRefer(String text,int start,int count) {
 		// TODO Auto-generated method stub
-		return referDao.getRefer(text);
+		return referDao.getRefer(text, start, count);
 	}
 	@Override
-	public List<Refer> getRefers() {
+	public List<Refer> getRefers(int start,int count) {
 		// TODO Auto-generated method stub
-		return referDao.getRefers();
+		return referDao.getRefers(start, count);
 	}
 	@Override
 	public Refer chakan(Integer id) {
@@ -39,9 +39,24 @@ public class ReferServiceImpl implements ReferService {
 		referDao.uprefer(refer);
 	}
 	@Override
-	public List<Refer> queryStu() {
+	public List<Refer> queryStu(int start,int count) {
 		// TODO Auto-generated method stub
-		return referDao.queryStu();
+		return referDao.queryStu(start, count);
+	}
+	@Override
+	public int getRefernum(String text) {
+		// TODO Auto-generated method stub
+		return referDao.getRefernum(text);
+	}
+	@Override
+	public int getRefersnum() {
+		// TODO Auto-generated method stub
+		return referDao.getRefersnum();
+	}
+	@Override
+	public int queryStunum() {
+		// TODO Auto-generated method stub
+		return referDao.queryStunum();
 	}
 	
 }

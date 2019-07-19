@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" />
 </head>
 <body>
-<table>
+<table class="table table-hover">
 <tr><td>姓名</td><td></td><td></td><td>${qrefer.refername }</td></tr>
 <tr><td>电话</td><td></td><td></td><td>${qrefer.tel }</td></tr>
 <tr><td>QQ</td><td></td><td></td><td>${qrefer.QQ }</td></tr>

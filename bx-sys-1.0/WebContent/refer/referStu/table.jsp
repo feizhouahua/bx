@@ -6,13 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" />
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<form id="form" >
+<form id="form">
 查询条件： <input type="text" name="txt">  姓名|QQ|电话
 </form>
-<table border="1">
+<table class="table table-hover">
 <tr>
 <td>姓名</td>
 <td>电话</td>
@@ -39,7 +40,14 @@
 			<td><a href="enter.html?id=${w.id}">录入学籍</a></td>
 		</tr>
 	</c:forEach>
+	<tr>
+	<td><a href="into.html?pag=0">首页</a></td>
+	<td><a href="into.html?pag=${pag>1 ? pag-1 : 1}">上一页</a></td>
+	<td><a href="into.html?pag=${pag < nums ? pag +1: nums }">下一页</a></td>
+	<td><a href="into.html?pag=${nums }">尾页</a></td>
+	</tr>
 </table>
+${pags }
 </body>
 <script type="text/javascript">
 <%-- $("[name='txt']").blur(function(){

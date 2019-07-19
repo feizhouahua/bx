@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hxzy.bx.entity.Refer;
 import com.hxzy.bx.entity.Student;
 import com.hxzy.bx.service.ReferService;
-import com.mysql.cj.Session;
 
 @Controller
 public class ReferController {
@@ -27,22 +26,28 @@ public class ReferController {
 		this.referService = referService;
 	}
 	
-	@RequestMapping("refer/referStu/hei")
-	public String in() {
-		return "redirect:into.html";
-	}
+	/*
+	 * @RequestMapping("refer/referStu/into") public String
+	 * getRefers(@RequestParam(value="pag") int pag,HttpSession session) { int i =
+	 * referService.getRefersnum(); int c=1;//一页几条 int b=i/c;//共有几页
+	 * System.out.println(i); System.out.println(pag); if (b*c<i) { b=b+1; }
+	 * System.out.println(b); List<Refer> refers =
+	 * referService.getRefers((pag-1)*c,c); session.setAttribute("pags", pag);
+	 * session.setAttribute("nums", b); session.setAttribute("refers", refers);
+	 * return "table"; }
+	 */
 	
 	@RequestMapping("refer/referStu/into")
-	public String getRefers(HttpSession session) {
-		List<Refer> refers = referService.getRefers();
+	public String getRefer(@RequestParam(defaultValue="") String txt,@RequestParam(defaultValue="0") int pag,HttpSession session) {
+		int i = referService.getRefernum("1");
+		int c=1; //一页几条
+		int b=i/c;//共有几页
+		if (b*c<i) {
+			b=b+1;
+		}
+		List<Refer> refers = referService.getRefer("1",pag*c,c);
+		session.setAttribute("nums", i);
 		session.setAttribute("refers", refers);
-		return "table";
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, value="/select3")
-	public String getRefer(@ModelAttribute String txt,HttpSession session) {
-		List<Refer> refers = referService.getRefer(txt);
-		session.setAttribute("refer", refers);
 		return "table";
 	}
 	
@@ -87,11 +92,17 @@ public class ReferController {
 	}
 	
 	@RequestMapping("queryStu")
-	public String queryStu(HttpSession session) {
-		System.out.println(123);
+	public String queryStu(@RequestParam(defaultValue="0") Integer pag ,HttpSession session) {
 		List<Refer> refers = new ArrayList<Refer>();
-		refers = referService.queryStu();
+		int i = referService.queryStunum();
+		int c=2;
+		int b=i/c;//共有几页
+		if (b*c<i) {
+			b=b+1;
+		}
+		refers = referService.queryStu(pag*c,1);
 		session.setAttribute("queryStu", refers);
+		session.setAttribute("numq", i);
 		return "redirect:refer/queryStu/query.jsp";
 	}
 	
