@@ -47,7 +47,7 @@ public class UserController {
 	@RequestMapping("change")
 	public String change(@ModelAttribute User user,HttpSession session) {
 		
-		return "home";
+		return "update";
 	}
 	
 }

@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>更改密码</title>
 <!-- Bootstrap core CSS -->
-<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href="../../css/dashboard.css" rel="stylesheet">
+<link href="./css/dashboard.css" rel="stylesheet">
 <style type="text/css">
 	#ahref{
 		float: right;
@@ -35,10 +35,16 @@
 		</td>
 	</tr>
 	<tr>
+		<td><br></td>
+	</tr>
+	<tr>
 		<td>新密码:</td>
 		<td>
 			<input type="text" name="newpassword"/>
 		</td>
+	</tr>
+	<tr>
+		<td><br></td>
 	</tr>
 	<tr>
 		<td>确认密码:</td>

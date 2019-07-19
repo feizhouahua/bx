@@ -50,7 +50,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><span>今天是：</span><span id="times"></span></li>
 					<li><span>欢迎您:${loginUser.username}</span></li>
-					<li><a href="change.html">更改密码</a></li>
+					<li><a href="change.html" target="nl">更改密码</a></li>
 					<li><a href="loginout.html">重新登录</a></li>
 				</ul>
 			</div>
