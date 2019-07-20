@@ -12,5 +12,8 @@
 		<typeAlias type="com.hxzy.bx.entity.Department" alias="Department"/>
 		<typeAlias type="com.hxzy.bx.entity.Post" alias="Post"/>
 		<typeAlias type="com.hxzy.bx.entity.Staff" alias="Staff"/>
+		<typeAlias type="com.hxzy.bx.entity.Class" alias="Class"/>
+		<typeAlias type="com.hxzy.bx.entity.Student" alias="Student"/>
+		<typeAlias type="com.hxzy.bx.entity.Course_type" alias="Course_type"/>
 	</typeAliases>
 </configuration>

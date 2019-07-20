@@ -11,7 +11,7 @@ public class Student implements Serializable{
 
 	private Integer id;
 	private String student_name;
-	private Integer sex;
+	private String sex;
 	private String Id_card;
 	private String Tel;
 	private String QQ;
@@ -42,10 +42,10 @@ public class Student implements Serializable{
 	public void setStudent_name(String student_name) {
 		this.student_name = student_name;
 	}
-	public Integer getSex() {
+	public String getSex() {
 		return sex;
 	}
-	public void setSex(Integer sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 	public String getId_card() {

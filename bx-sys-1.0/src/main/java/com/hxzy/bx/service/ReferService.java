@@ -11,11 +11,11 @@ public interface ReferService {
 	//数量
 	public int getRefernum(String text);
 		
-	//查询全部意向学员
-	public List<Refer> getRefers(int start,int count);
-	
-	//数量
-	public int getRefersnum();
+	/*
+	 * //查询全部意向学员 public List<Refer> getRefers(int start,int count);
+	 * 
+	 * //数量 public int getRefersnum();
+	 */
 	
 	//通过id查询学员
 	public Refer chakan(Integer id);
@@ -24,8 +24,8 @@ public interface ReferService {
 	public void uprefer(Refer refer);
 	
 	//查询已报名学员
-	public List<Refer> queryStu(int start,int count);
+	public List<Refer> queryStu(String text,int start,int count);
 	
 	//数量
-	public int queryStunum();
+	public int queryStunum(String text);
 }

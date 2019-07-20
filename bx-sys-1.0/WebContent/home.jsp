@@ -65,10 +65,10 @@
 						咨询部<img src="./images/more.png">
 					</dt>
 					<dd class="first_dd">
-						<a href="refer/referStu/into.html" target="nl">咨询学生管理</a>
+						<a href="refer/referStu/into.html?page=1" target="nl">咨询学生管理</a>
 					</dd>
 					<dd>
-						<a href="queryStu.html" target="nl">查询学生报名</a>
+						<a href="refer/queryStu/queryStu.html?page=1" target="nl">查询学生报名</a>
 					</dd>
 				</dl>
 
@@ -77,7 +77,7 @@
 						学工部<img src="./images/more.png">
 					</dt>
 					<dd class="first_dd">
-						<a href="#">在校学生管理</a>
+						<a href="stu_depart/stu_manage/stus.html?page=1" target="nl">在校学生管理</a>
 					</dd>
 					<dd>
 						<a href="#">学生升级/转班</a>

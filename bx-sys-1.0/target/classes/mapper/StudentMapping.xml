@@ -3,9 +3,53 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.StudentDao">
-	<select id="qustu">
-		select id,student_name,admission_time,class_id,QQ,Tel,
-		tuition_paid,unpaid_tuition,state,
+	<select id="queryStus" resultMap="list">
+		select s.id,s.student_name,s.admission_time,c.classname,s.QQ,s.Tel,t.course_name,s.student_sex,
+		s.tuition_paid,s.unpaid_tuition,s.state 
+		from t_student s,t_class c,t_course_type t
+   WHERE c.id = s.class_id and t.id = c.course_id and (s.student_name like "%"#{text}"%" 
+   or s.Tel like "%"#{text}"%"  or s.QQ like "%"#{text}"%"  or s.student_sex like "%"#{text}"%" )
+   <if test="classname != null and classname != ''">
+   		and c.classname = #{classname}
+   </if>
+   <if test="course != null and course != ''">
+   		and t.course_name = #{course}
+   </if>
+    limit #{start},#{count}
 	</select>
+	
+	<select id="stuNum" resultType="int">
+		select count(1) from t_student s,t_class c,t_course_type t
+ WHERE c.id = s.class_id and t.id = c.course_id and (s.student_name like "%"#{text}"%" 
+   or s.Tel like "%"#{text}"%"  or s.QQ like "%"#{text}"%"  or s.student_sex like "%"#{text}"%" )
+   <if test="classname != null and classname != ''">
+   		and c.classname = #{classname}
+   </if>
+   <if test="course != null and course != ''">
+   		and t.course_name = #{course}
+   </if>
+	</select>
+	
+	<resultMap type="com.hxzy.bx.entity.Student" id="list">
+		<id column="id" property="id"/>
+		<result column="student_name" property="student_name"/>
+		<result column="admission_time" property="admission_time"/>
+		<result column="QQ" property="QQ"/>
+		<result column="Tel" property="Tel"/>
+		<result column="student_sex" property="sex"/>
+		
+		<result column="tuition_paid" property="tuition_paid"/>
+		<result column="unpaid_tuition" property="unpaid_tuition"/>
+		<result column="state" property="state"/>
+		
+		<collection property="classes"  ofType="com.hxzy.bx.entity.Class">
+			<id column="id" property="id"/>
+			<result column="classname" property="classname"/>
+			<collection property="course_type" ofType="Course_type">
+				<id column="id" property="id"/>
+				<result column="course_name" property="course_name"/>
+			</collection>
+		</collection>
+	</resultMap>
 	
 </mapper>

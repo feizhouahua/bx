@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../../css/bootstrap.min.css" />
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<form id="form">
-查询条件： <input type="text" name="txt">  姓名|QQ|电话
+<form id="form" action="into.html">
+查询条件： <input type="text" name="txt" value="${txt }">  姓名|QQ|电话
 </form>
 <table class="table table-hover">
 <tr>
@@ -41,27 +41,32 @@
 		</tr>
 	</c:forEach>
 	<tr>
-	<td><a href="into.html?pag=0">首页</a></td>
-	<td><a href="into.html?pag=${pag>1 ? pag-1 : 1}">上一页</a></td>
-	<td><a href="into.html?pag=${pag < nums ? pag +1: nums }">下一页</a></td>
-	<td><a href="into.html?pag=${nums }">尾页</a></td>
+	<td><a href="into.html?txt=${txt }&page=1">首页</a></td>
+	<td><a href="into.html?txt=${txt }&page=${page>1 ? page-1 : 1}">上一页</a></td>
+	<td><a href="into.html?txt=${txt }&page=${page < nums ? page +1: nums }">下一页</a></td>
+	<td><a href="into.html?txt=${txt }&page=${nums }">尾页</a></td>
+	<td>${page }/${pags }</td>
 	</tr>
 </table>
-${pags }
+
 </body>
+<style>
+a:link {text-decoration: none;}  
+a:visited {text-decoration: none;}  
+a:active {text-decoration: none;}  
+a:hover {text-decoration: none;}  
+</style>
 <script type="text/javascript">
-<%-- $("[name='txt']").blur(function(){
-	alert(1);
-	alert("<%=request.getContextPath()%>");
-	$.ajax({
+$("[name='txt']").blur(function(){
+	$("#form").submit();
+	/* $.ajax({
 		type:"POST",
-		url:"<%=request.getContextPath()%>/select3",
-		data:$("#form").serialize(),
+		url:"into.html?txt="txt,
 		success:function(msg){
 			console.log(msg);
 			//$("name=['area']").innerHTML=content;
 		}
-	})
-}) --%>
+	}) */
+})
 </script>
 </html>

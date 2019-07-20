@@ -76,6 +76,7 @@ public class StaffController {
 	public String ajaxPost(@RequestParam String depart_name) throws UnsupportedEncodingException {
 		List<Post> post_names=postService.getPost_names(depart_name);
 		JSONArray array=JSONArray.fromObject(post_names);
+	
 		return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
 	}
 	

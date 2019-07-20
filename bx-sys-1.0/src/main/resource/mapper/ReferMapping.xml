@@ -44,10 +44,13 @@
 <!-- 查询已报名的咨询学生 -->
 <select id="queryStu" resultType="com.hxzy.bx.entity.Refer">
 	select id,refername,tel,QQ,Intention_level,state,marketer,Intention_class,Intention_subject
-			from t_refer where  state = "已报名" limit #{start},#{count}
+			from t_refer 
+			where  state = "已报名" and (refername like "%"#{text}"%" or tel like "%"#{text}"%" or QQ like "%"#{text}"%")
+			limit #{start},#{count}
 </select>
 
 <select id="queryStunum" resultType="Integer">
-	select count(1) from t_refer where  state = "已报名"
+	select count(1) from t_refer where  state = "已报名" 
+	and (refername like "%"#{text}"%" or tel like "%"#{text}"%" or QQ like "%"#{text}"%")
 </select>
 </mapper>

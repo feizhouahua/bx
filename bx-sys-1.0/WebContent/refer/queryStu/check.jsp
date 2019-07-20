@@ -6,8 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
+<form id="form" action="into.html">
+查询条件： <input type="text" name="txt" value="${txt }">  姓名|QQ|电话
+</form>
 <table class="table table-hover">
 <tr><td>姓名</td><td></td><td></td><td>${qrefer.refername }</td></tr>
 <tr><td>电话</td><td></td><td></td><td>${qrefer.tel }</td></tr>
