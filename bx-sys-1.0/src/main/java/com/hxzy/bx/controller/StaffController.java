@@ -1,11 +1,18 @@
 package com.hxzy.bx.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hxzy.bx.entity.Department;
 import com.hxzy.bx.entity.Post;
+import com.hxzy.bx.entity.Role;
 import com.hxzy.bx.entity.Staff;
 import com.hxzy.bx.entity.User;
 import com.hxzy.bx.service.DepartmentService;
@@ -76,7 +84,8 @@ public class StaffController {
 	public String ajaxDepart() throws UnsupportedEncodingException {
 		List<Department> depart_names=departmentService.getDepart_names();
 		JSONArray array=JSONArray.fromObject(depart_names);
-		return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
+		//return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
+		return array.toString();
 	}
 	
 	@ResponseBody
@@ -84,19 +93,56 @@ public class StaffController {
 	public String ajaxPost(@RequestParam String depart_name) throws UnsupportedEncodingException {
 		List<Post> post_names=postService.getPost_names(depart_name);
 		JSONArray array=JSONArray.fromObject(post_names);
-		return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
+		//return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
+		return array.toString();
 	}
 	
 	@RequestMapping("resources/staff/add")
-	public String add(@ModelAttribute Staff staff,Post post) {
+	public String add(@ModelAttribute Staff staff,Post post,Department department) {
 		Post p=postService.getPostByName(post.getPost_name());
 		staff.setPost(p);
+		
+		//加密操作
+//	    try {
+//	    	MessageDigest md = MessageDigest.getInstance("MD5");
+//	        md.update(staff.getPassword().getBytes());
+//	        staff.setPassword(new BigInteger(1, md.digest()).toString(16));
+//	    } catch (NoSuchAlgorithmException e) {
+//	        e.printStackTrace();
+//	    }
+		PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+    	staff.setPassword(passwordEncoder.encode(staff.getPassword()));
+		
 		//添加员工的同时也向user表添加登录名和密码
 		User user=new User();
+		Date date=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String datetime=sdf.format(date);
+		user.setCreateDate(datetime);
+		user.setLastLoginTime(datetime);
 		user.setUsername(staff.getLoginname());
 		user.setPassword(staff.getPassword());
-		userService.addUser(user);
+		System.out.println(department.getDepart_name());
 		
+		//向user表添加一条数据并返回添加数据的user_id
+		userService.addUserGetId(user);
+		
+		System.out.println(user.getId());
+		
+		//根据角色(部门名字)获得角色id（role_id）
+		String roleName=department.getDepart_name();
+		Role role=userService.getRoleIdByDepartName(roleName);
+		
+		System.out.println(role.getId());
+		
+		//Role role=new Role();
+		//role.setId(id);
+		
+		//向用户角色中间表添加一条数据
+		userService.addUserRole(user, role);
+		
+		//userService.addUser(user);
+		//向员工表添加一条数据
 		staffService.addStaff(staff);
 		return "redirect:list.html?page=1";
 	}

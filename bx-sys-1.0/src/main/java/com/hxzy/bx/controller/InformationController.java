@@ -75,7 +75,8 @@ public class InformationController {
 	public String classname() throws UnsupportedEncodingException {
 		List<Class> classes=classService.getClass_names();
 		JSONArray array=JSONArray.fromObject(classes);
-		return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
+		//return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
+		return array.toString();
 	}
 	
 	@ResponseBody
@@ -83,7 +84,8 @@ public class InformationController {
 	public String studentname(@RequestParam String classname) throws UnsupportedEncodingException {
 		List<Student> students=studentService.getStudentNames(classname);
 		JSONArray array=JSONArray.fromObject(students);
-		return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
+		//return new String(array.toString().getBytes("utf-8"),"iso-8859-1");
+		return array.toString();
 	}
 	
 	@RequestMapping("employments/information/updatea")

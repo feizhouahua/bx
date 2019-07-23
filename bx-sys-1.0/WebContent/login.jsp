@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,12 +35,15 @@
 <!-- Bootstrap core CSS -->
 <link href="./css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href=".css/signin.css" rel="stylesheet">
+<link href="./css/signin.css" rel="stylesheet">
 </head>
 <body>
 <div id="center">
 <div class="container">
-          <form class="form-signin" action="login.html" method="post">
+		  <c:if test="${not empty param.error}">
+		  	<span style="color: red">用户名或密码错误!</span>
+		  </c:if>
+          <form class="form-signin" action="${pageContext.request.contextPath}/login" method="post">
             <h2 class="form-signin-heading"><strong>补习学校后台管理系统</strong></h2>
             <br>
             <div class="log">
