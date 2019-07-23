@@ -15,6 +15,4 @@ public class ClassServiceImpl implements ClassService {
 	public void setClassDao(ClassDao classDao) {
 		this.classDao = classDao;
 	}
-	
-	
 }

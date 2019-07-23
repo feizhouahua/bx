@@ -16,15 +16,6 @@
 			where refername like "%"#{text}"%" or tel like "%"#{text}"%" or QQ like "%"#{text}"%"
 			
 </select>
-<!-- 查询咨询人信息 -->
-<!-- <select id="getRefers" resultType="com.hxzy.bx.entity.Refer">
-	select id,refername,tel,QQ,Intention_level,state,marketer,Intention_class,Intention_subject
-			from t_refer limit #{start},#{count}
-</select>
-
-<select id="getRefersnum" resultType="Integer">
-	select count(1) from t_refer
-</select> -->
 
 <!-- 通过ID查询咨询人 -->
 <select id="chakan" resultType="com.hxzy.bx.entity.Refer">
@@ -49,8 +40,10 @@
 			limit #{start},#{count}
 </select>
 
+<!-- 查询报名学生数量 -->
 <select id="queryStunum" resultType="Integer">
 	select count(1) from t_refer where  state = "已报名" 
 	and (refername like "%"#{text}"%" or tel like "%"#{text}"%" or QQ like "%"#{text}"%")
 </select>
+
 </mapper>

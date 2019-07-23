@@ -13,13 +13,6 @@ public interface ReferDao {
 	//数量
 	public int getRefernum(String text);
 	
-	/*
-	 * //查询全部意向学员 public List<Refer> getRefers(@Param(value = "start") int
-	 * start,@Param(value = "count")int count);
-	 * 
-	 * //数量 public int getRefersnum();
-	 */
-	
 	//通过id查询学员
 	public Refer chakan(Integer id);
 	
@@ -31,4 +24,6 @@ public interface ReferDao {
 	
 	//数量
 	public int queryStunum(String text);
+	
+	
 }

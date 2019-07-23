@@ -45,28 +45,13 @@
 	<td><a href="into.html?txt=${txt }&page=${page>1 ? page-1 : 1}">上一页</a></td>
 	<td><a href="into.html?txt=${txt }&page=${page < nums ? page +1: nums }">下一页</a></td>
 	<td><a href="into.html?txt=${txt }&page=${nums }">尾页</a></td>
-	<td>${page }/${pags }</td>
+	<td>${page }/${nums }</td>
 	</tr>
 </table>
-
 </body>
-<style>
-a:link {text-decoration: none;}  
-a:visited {text-decoration: none;}  
-a:active {text-decoration: none;}  
-a:hover {text-decoration: none;}  
-</style>
 <script type="text/javascript">
 $("[name='txt']").blur(function(){
 	$("#form").submit();
-	/* $.ajax({
-		type:"POST",
-		url:"into.html?txt="txt,
-		success:function(msg){
-			console.log(msg);
-			//$("name=['area']").innerHTML=content;
-		}
-	}) */
 })
 </script>
 </html>

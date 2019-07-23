@@ -25,17 +25,9 @@ public class ReferController {
 		this.referService = referService;
 	}
 
-	/*
-	 * @RequestMapping("refer/referStu/into") public String
-	 * getRefers(@RequestParam(value="pag") int pag,HttpSession session) { int i =
-	 * referService.getRefersnum(); int c=1;//一页几条 int b=i/c;//共有几页
-	 * System.out.println(i); System.out.println(pag); if (b*c<i) { b=b+1; }
-	 * System.out.println(b); List<Refer> refers =
-	 * referService.getRefers((pag-1)*c,c); session.setAttribute("pags", pag);
-	 * session.setAttribute("nums", b); session.setAttribute("refers", refers);
-	 * return "table"; }
-	 */
 
+	
+	//条件查询
 	@RequestMapping("refer/referStu/into")
 	public String getRefer(@RequestParam(defaultValue = "") String txt, 
 			@RequestParam(defaultValue = "1") int page,HttpSession session) {
@@ -45,26 +37,25 @@ public class ReferController {
 		if (lastPage * pagecount < count) { // 除不尽加一
 			lastPage = lastPage + 1;
 		}
-		System.out.println("---count:"+count);
-		System.out.println("---txt:"+txt);
-		System.out.println("---page:"+page);
-
 		List<Refer> refers = referService.getRefer(txt, (page-1) * pagecount, pagecount);
 		session.setAttribute("page", page);
-		session.setAttribute("pags", lastPage);
+		session.setAttribute("refers", refers);
 		session.setAttribute("txt", txt);
 		session.setAttribute("nums", lastPage);
-		session.setAttribute("refers", refers);
 		return "table";
-	}
 
-	@RequestMapping("refer/referStu/chakan")
-	public String chakan(@RequestParam Integer id, HttpSession session) {
+	}
+	
+	
+	//跳转查看功能
+	@RequestMapping("refer/referStu/chakan" )
+	public String chakan(@RequestParam Integer id,HttpSession session) {
 		Refer refer = referService.chakan(id);
 		session.setAttribute("refer", refer);
 		return "selrefer";
 	}
 
+	//跳转跟踪功能
 	@RequestMapping("refer/referStu/genzong")
 	public String genzong(@RequestParam Integer id, HttpSession session) {
 		Refer refer = referService.chakan(id);
@@ -72,6 +63,7 @@ public class ReferController {
 		return "trackadd";
 	}
 
+	//跳转修改功能
 	@RequestMapping("refer/referStu/xiugai")
 	public String xiugai(@RequestParam Integer id, HttpSession session) {
 		Refer refer = referService.chakan(id);
@@ -79,6 +71,7 @@ public class ReferController {
 		return "edit";
 	}
 
+	
 	@RequestMapping("refer/referStu/upup")
 	public String xiug(@ModelAttribute Refer refer) {
 		referService.uprefer(refer);
@@ -98,6 +91,7 @@ public class ReferController {
 		return "redirect:../../stu_depart/stu_manage/addstu.jsp";
 	}
 
+
 	@RequestMapping("refer/queryStu/queryStu")
 	public String queryStu(@RequestParam(defaultValue = "") String txts, @RequestParam(defaultValue = "1") int page,HttpSession session) {
 		int counts = referService.queryStunum(txts);  //记录总条数
@@ -113,6 +107,7 @@ public class ReferController {
 		session.setAttribute("qupag", page);
 		session.setAttribute("txts", txts);
 		return "query";
+
 	}
 	
 

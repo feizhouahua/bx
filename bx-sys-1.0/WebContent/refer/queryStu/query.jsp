@@ -38,12 +38,11 @@
 	</c:forEach>
 	<tr>
 	<td></td>
-	<td><a href="queryStu.html?txt=${txt }&page=1"><button type="button" class="btn btn-link">首页</button></a></td>
-	<td><button type="button" class="btn btn-link"><a href="queryStu.html?txt=${txt }&page=${pag>1 ? pag-1 : 1}">上一页</a></button></td>
-	<td><button type="button" class="btn btn-link"><a href="queryStu.html?txt=${txt }&page=${pag < numq ? pag +1: numq }">下一页</a></button></td>
-	<td><button type="button" class="btn btn-link"><a href="queryStu.html?txt=${txt }&page=${numq }">尾页</a></button></td>
+	<td><a href="queryStu.html?txts=${txts }&page=1"><button type="button" class="btn btn-link">首页</button></a></td>
+	<td><button type="button" class="btn btn-link"><a href="queryStu.html?txts=${txts }&page=${pag>1 ? pag-1 : 1}">上一页</a></button></td>
+	<td><button type="button" class="btn btn-link"><a href="queryStu.html?txts=${txts }&page=${pag < numq ? pag +1: numq }">下一页</a></button></td>
+	<td><button type="button" class="btn btn-link"><a href="queryStu.html?txts=${txts }&page=${numq }">尾页</a></button></td>
 	<td>${qupag }/${numq }</td>
-	<td></td>
 	</tr>
 </table>
 </body>

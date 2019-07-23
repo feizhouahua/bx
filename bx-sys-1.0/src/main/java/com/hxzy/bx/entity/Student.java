@@ -11,7 +11,7 @@ public class Student implements Serializable{
 
 	private Integer id;
 	private String student_name;
-	private String sex;
+	private String student_sex;
 	private String Id_card;
 	private String Tel;
 	private String QQ;
@@ -29,7 +29,9 @@ public class Student implements Serializable{
 	private String admission_time;
 	private String state;
 	private Class classes;
-	
+	public Student() {
+		super();
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -42,11 +44,12 @@ public class Student implements Serializable{
 	public void setStudent_name(String student_name) {
 		this.student_name = student_name;
 	}
-	public String getSex() {
-		return sex;
+	
+	public String getStudent_sex() {
+		return student_sex;
 	}
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setStudent_sex(String student_sex) {
+		this.student_sex = student_sex;
 	}
 	public String getId_card() {
 		return Id_card;
@@ -150,6 +153,4 @@ public class Student implements Serializable{
 	public void setClasses(Class classes) {
 		this.classes = classes;
 	}
-	
-	
 }

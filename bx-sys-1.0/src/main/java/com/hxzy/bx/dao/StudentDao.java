@@ -15,4 +15,15 @@ public interface StudentDao {
 	public int stuNum(@Param("text")String text,@Param("course")String course,
 			@Param("classname") String classname);
 	
+	//添加学生
+	public void addStu(@Param("student") Student student,@Param(value = "id") int id);
+	
+	//通过classname查询class_id
+	public int queryid(String classname);
+	
+	//更新数据
+	public void upStudent(@Param(value="student")Student student,@Param(value="id")Integer id);
+	
+	//通过id查询学生信息
+	public Student getStubyid(Integer id);
 }
