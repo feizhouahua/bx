@@ -146,7 +146,7 @@ public class StaffController {
 		staffService.addStaff(staff);
 		return "redirect:list.html?page=1";
 	}
-	
+	 
 	@RequestMapping("resources/staff/updatea")
 	public String updatea(@RequestParam int id,Model model) {
 		Staff staff=staffService.getStaffById(id);
@@ -159,6 +159,9 @@ public class StaffController {
 	public String updateb(@ModelAttribute Staff staff,Post post) {
 		Post p=postService.getPostByName(post.getPost_name());
 		staff.setPost(p);
+		//密码加密
+		PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+		staff.setPassword(passwordEncoder.encode(staff.getPassword()));
 		staffService.updateStaff(staff);
 		return "redirect:list.html?page=1";
 	}

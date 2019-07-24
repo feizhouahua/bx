@@ -41,17 +41,24 @@
 		<security:intercept-url pattern="/home.html" access="hasAnyAuthority('ROLE_ALL_EDUCATION','ROLE_ALL_RESOURCES','ROLE_ALL_EMPLOYMENTS','ROLE_ALL_REFER','ROLE_ALL_ACADEMIC')"/>
 		<security:intercept-url pattern="/update.html" access="hasAnyAuthority('ROLE_ALL_EDUCATION','ROLE_ALL_RESOURCES','ROLE_ALL_EMPLOYMENTS','ROLE_ALL_REFER','ROLE_ALL_ACADEMIC')"/>
 		
+		<!-- 学工部 -->
+		<security:intercept-url pattern="/stu_depart/stu_manage/stus.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
+		<security:intercept-url pattern="/stu_depart/stu_manage/addstudent.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
+		<security:intercept-url pattern="/stu_depart/stu_manage/upstu.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
+		<security:intercept-url pattern="/stu_depart/stu_manage/add.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
 		
-		<!-- <security:intercept-url pattern="/update.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
-		<security:intercept-url pattern="/update.html" access="hasAuthority('ROLE_ALL_EMPLOYMENTS')"/>
-		<security:intercept-url pattern="/update.html" access="hasAuthority('ROLE_ALL_REFER')"/>
-		<security:intercept-url pattern="/update.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
-		<security:intercept-url pattern="/update.html" access="hasAuthority('ROLE_ALL_EDUCATION')"/> -->
-		
-		<!-- 人力资源部 -->
-		<security:intercept-url pattern="/refer/referStu/upup.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<!-- 咨询部 -->
+		<!-- <security:intercept-url pattern="/refer/referStu/upup.html" access="hasAuthority('ROLE_ALL_REFER')"/>
 		<security:intercept-url pattern="/refer/referStu/hei.html" access="hasAuthority('ROLE_ALL_REFER')"/>
-		<security:intercept-url pattern="/refer/referStu/addtrack.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/referStu/addtrack.html" access="hasAuthority('ROLE_ALL_REFER')"/> -->
+		
+		<security:intercept-url pattern="/refer/referStu/into.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/referStu/chakan.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/referStu/xiugai.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/referStu/genzong.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/referStu/enter.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/queryStu/into.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/queryStu/queryStu.html" access="hasAuthority('ROLE_ALL_REFER')"/>
 		
 		<!-- 人力资源部 -->
 		<security:intercept-url pattern="/resources/department/list.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>

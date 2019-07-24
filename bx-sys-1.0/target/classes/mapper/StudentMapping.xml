@@ -3,6 +3,92 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.StudentDao">
+	<!-- 查询学生信息 -->
+	<select id="queryStus" resultMap="list">
+		select s.id,s.student_name,s.admission_time,c.classname,s.QQ,s.Tel,t.course_name,s.student_sex,
+		s.tuition_paid,s.unpaid_tuition,s.state 
+		from t_student s,t_class c,t_course_type t
+   WHERE c.id = s.class_id and t.id = c.course_id and (s.student_name like "%"#{text}"%" 
+   or s.Tel like "%"#{text}"%"  or s.QQ like "%"#{text}"%"  or s.student_sex like "%"#{text}"%" )
+   <if test="classname != null and classname != ''">
+   		and c.classname = #{classname}
+   </if>
+   <if test="course != null and course != ''">
+   		and t.course_name = #{course}
+   </if>
+    limit #{start},#{count}
+	</select>
+	
+	<!-- 查询数量 -->
+	<select id="stuNum" resultType="int">
+		select count(1) from t_student s,t_class c,t_course_type t
+ WHERE c.id = s.class_id and t.id = c.course_id and (s.student_name like "%"#{text}"%" 
+   or s.Tel like "%"#{text}"%"  or s.QQ like "%"#{text}"%"  or s.student_sex like "%"#{text}"%" )
+   <if test="classname != null and classname != ''">
+   		and c.classname = #{classname}
+   </if>
+   <if test="course != null and course != ''">
+   		and t.course_name = #{course}
+   </if>
+	</select>
+	
+	<!-- 添加学生信息 -->
+	<insert id="addStu" parameterType="Student">
+		insert into t_student
+		(student_name,student_sex,tuition_paid,unpaid_tuition,Id_card,Tel,QQ,Email,graduated_school,
+		education,card_address,student_description,family_tel,family_people,class_id) 
+		values (#{student.student_name},#{student.student_sex},#{student.tuition_paid},
+		#{student.unpaid_tuition},#{student.Id_card},#{student.Tel},#{student.QQ},#{student.Email},#{student.graduated_school},#{student.education},
+		#{student.card_address},#{student.student_description},#{student.family_tel},#{student.family_people},#{id})
+	</insert>
+	
+	<!-- 根据classname查class_id -->
+	<select id="queryid" parameterType="java.lang.String" resultType="integer">
+		select id from t_class where classname=#{classname}
+	</select>
+	
+	<!-- 更新学生信息 -->
+	<update id="upStudent">
+		update t_student 
+		set student_name=#{student.student_name},
+		student_sex=#{student.student_sex},
+		tuition_paid=#{student.tuition_paid},
+		unpaid_tuition=#{student.unpaid_tuition},Id_card=#{student.Id_card},Tel=#{student.Tel},QQ=#{student.QQ},Email=#{student.Email},
+		graduated_school=#{student.graduated_school},education=#{student.education},card_address=#{student.card_address},
+		student_description=#{student.student_description},
+		family_tel=#{student.family_tel},family_people=#{student.family_people},class_id=#{id} where id = #{student.id}
+	</update>
+	
+	<!-- 根据id查找学生信息 -->	
+	<select id="getStubyid" parameterType="Integer" resultType="Student">
+		select * from t_student where id = #{id}
+	</select>
+	
+	<resultMap type="Student" id="list">
+		<id column="id" property="id"/>
+		<result column="student_name" property="student_name"/>
+		<result column="admission_time" property="admission_time"/>
+		<result column="QQ" property="QQ"/>
+		<result column="Tel" property="Tel"/>
+		<result column="student_sex" property="student_sex"/>
+		
+		<result column="tuition_paid" property="tuition_paid"/>
+		<result column="unpaid_tuition" property="unpaid_tuition"/>
+		<result column="state" property="state"/>
+		<result column="" property=""/>
+		<collection property="classes"  ofType="com.hxzy.bx.entity.Class">
+			<id column="id" property="id"/>
+			<result column="classname" property="classname"/>
+			<collection property="course_type" ofType="Course_type">
+				<id column="id" property="id"/>
+				<result column="course_name" property="course_name"/>
+			</collection>
+		</collection>
+	</resultMap>
+	<select id="qustu">
+		select id,student_name,admission_time,class_id,QQ,Tel,
+		tuition_paid,unpaid_tuition,state,
+	</select>
 	
 	<!-- 根据班级名字（classname）查找该班的学生 -->
 	<select id="getStudentNames" parameterType="java.lang.String" resultMap="list">
@@ -15,8 +101,4 @@
 		update t_student set state=#{state} where student_name=#{studentname} 
 	</select>
 	
-	<resultMap type="Student" id="list">
-		<id column="id" property="id"/>
-		<result column="student_name" property="student_name"/>
-	</resultMap>
 </mapper>

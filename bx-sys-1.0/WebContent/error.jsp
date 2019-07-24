@@ -5,8 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>权限不足</title>
+<style type="text/css">
+	h2{
+		margin: 0px auto;
+		text-align: center;
+	}
+</style>
 </head>
 <body>
-<h2>对不起，你的权限不足，不能访问该资源</h2>
+<div>
+	<h2>对不起，你的权限不足，不能访问该资源</h2>
+</div>
 </body>
 </html>

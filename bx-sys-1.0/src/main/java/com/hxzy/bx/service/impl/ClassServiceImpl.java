@@ -18,11 +18,11 @@ public class ClassServiceImpl implements ClassService {
 	public void setClassDao(ClassDao classDao) {
 		this.classDao = classDao;
 	}
+
 	@Override
 	public List<Class> getClass_names() {
 		// TODO Auto-generated method stub
 		return classDao.getClass_names();
 	}
-	
 	
 }

@@ -1,12 +1,8 @@
 package com.hxzy.bx.controller;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -88,17 +84,9 @@ public class UserController {
 		System.out.println(user.getId());
 		User user1=new User();
 		
+		//加密操作
 		PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
     	user.setPassword(passwordEncoder.encode(user.getPassword()));
-		
-//		//加密操作
-//	    try {
-//	    	MessageDigest md = MessageDigest.getInstance("MD5");
-//	        md.update(user.getPassword().getBytes());
-//	        user.setPassword(new BigInteger(1, md.digest()).toString(16));
-//	    } catch (NoSuchAlgorithmException e) {
-//	        e.printStackTrace();
-//	    }
 		
 		user1.setUsername(u.getUsername());
 		user1.setPassword(user.getPassword());
@@ -106,15 +94,7 @@ public class UserController {
 		if(u2==null) {
 			return "update"; 
 		}else {	
-//			//加密操作
-//		    try {
-//		    	MessageDigest md = MessageDigest.getInstance("MD5");
-//		        md.update(newpassword.getBytes());
-//		        newpassword=new BigInteger(1, md.digest()).toString(16);
-//		    } catch (NoSuchAlgorithmException e) {
-//		        e.printStackTrace();
-//		    }
-			
+			//加密操作
 			newpassword=passwordEncoder.encode(newpassword);
 			
 		    User u3=new User();

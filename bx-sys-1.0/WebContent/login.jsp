@@ -12,20 +12,21 @@
 		background-repeat:no-repeat;
        	background-size:100%;
        	
+       	
 	}
 	#center{
 		text-align: center;
   		height: 100%;
   		position: fixed;
   		width: 100%;
-  		margin-top: 250px;
+  		margin-top: 200px;
 	}
 	.log{
 		width: 300px;
    		margin: 0 auto;
 	}
 	.form-signin-heading{
-		font-size: 35px;
+		font-size: 30px;
 	}
 	button{
 		background-color: bule;
@@ -44,7 +45,7 @@
 		  	<span style="color: red">用户名或密码错误!</span>
 		  </c:if>
           <form class="form-signin" action="${pageContext.request.contextPath}/login" method="post">
-            <h2 class="form-signin-heading"><strong>补习学校后台管理系统</strong></h2>
+            <h3 class="form-signin-heading"><strong>补习学校后台管理系统</strong></h3>
             <br>
             <div class="log">
                <label for="inputEmail" class="sr-only">用户名</label>

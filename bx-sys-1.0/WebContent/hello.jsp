@@ -7,11 +7,21 @@
 <title>欢迎页</title>
 <style type="text/css">
 	body{
-		margin: 0px auto;
+		background-image:url("./images/back.jpg"); 
+		background-repeat:no-repeat;
+       	background-size:50%;
+       	background-position: top center;
+       	
+	}
+	div{
+		margin:0px auto;
+		text-align: center;
 	}
 </style>
 </head>
 <body>
-<h2>欢迎登录补习学校后台管理系统！</h2>
+<div>
+	<h2>欢迎登录补习学校后台管理系统！</h2>
+</div>
 </body>
 </html>

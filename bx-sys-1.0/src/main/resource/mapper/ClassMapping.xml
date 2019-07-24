@@ -13,4 +13,9 @@
 		<id column="id" property="id"/>
 		<result column="classname" property="classname"/>
 	</resultMap>
+
+	<select id="queryid" parameterType="java.lang.String">
+		select id from t_class where classname=#{classname)
+	</select>
+
 </mapper>
