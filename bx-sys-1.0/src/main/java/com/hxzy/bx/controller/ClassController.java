@@ -135,7 +135,7 @@ public class ClassController {
 			}
 			//System.out.println(f1+"------------------------------------------------------------");
 			//获得上传文件名
-			String filename=file.getOriginalFilename();
+			String filename=new String(file.getOriginalFilename().getBytes("iso-8859-1"),"utf-8");
 			
 			String newfilename=null;
 			if(filename==null || filename.equals("")) {
@@ -188,7 +188,8 @@ public class ClassController {
 		if(curriculums.size()>1) {
 			sdf=new SimpleDateFormat("yyyyMMddhhmmss");
 			for (Curriculum curriculum : curriculums) {
-				times.add(sdf.format(curriculum.getUpload_time()));
+				sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				times.add(sdf.format(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(curriculum.getUpload_time())));
 			}
 			Date a=getBigtime(times);
 			time=sdf.format(a);
@@ -215,6 +216,15 @@ public class ClassController {
 			}
 		}	
 		return date1;
+	}
+	
+	@RequestMapping("education/class/downloada")
+	public String downloada(@RequestParam int id,Model model) {
+		//根据class_id查询上传表（curriculum）
+		List<Curriculum> curriculums=curriculumService.getCurriculumById(id);
+		model.addAttribute("curriculumdownload", curriculums);
+		
+		return "download";
 	}
 	
 	
