@@ -9,13 +9,100 @@
 		select classname from t_class
 	</select>
 	
-	<resultMap type="Class" id="list">
-		<id column="id" property="id"/>
-		<result column="classname" property="classname"/>
-	</resultMap>
-
 	<select id="queryid" parameterType="java.lang.String">
 		select id from t_class where classname=#{classname)
 	</select>
-
+	
+	<!-- //分页查询所有数据 -->
+	<select id="getClasses" resultMap="list">
+		SELECT c.id,c.classname,c.opening_hours,c.graduation_time,c.state,c.other_notes,c.entrance_number,c.transfer_number,c.refund_number,c.student_number,c.upload_state,t.course_name FROM 
+		t_class c,t_course_type t WHERE c.course_id=t.id limit #{start},#{count}
+	</select>
+	
+	<!-- 查询数据库记录条数 -->
+	<select id="getCounts" resultType="java.lang.Integer">
+		select count(*) from t_class
+	</select>
+	
+	<!-- 查询所有的类别名 -->
+	<select id="getCourse_Names" resultMap="list2">
+		select course_name from t_course_type
+	</select>
+	
+	<!-- ////根据类别名查询获得类别id -->
+	<select id="getCourseIdByName" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select id from t_course_type where course_name=#{course_name}
+	</select>
+	
+	<!-- 添加班级 -->
+	<insert id="addClass" parameterType="Class">
+		insert into t_class(course_id,classname,opening_hours,graduation_time,state,other_notes,entrance_number,transfer_number,refund_number,student_number) 
+					values(#{course_type.id},#{classname},#{opening_hours},#{graduation_time},#{state},#{other_notes},#{entrance_number},#{transfer_number},#{refund_number},#{student_number})
+	</insert>
+	
+	<!-- 根据id查询class -->
+	<select id="getClassById" parameterType="java.lang.Integer" resultMap="list">
+		select a.*,b.course_name from t_class a,t_course_type b where a.course_id=b.id and a.id=#{id}
+	</select>
+	
+	<!-- 修改 -->
+	<update id="updateClass" parameterType="Class">
+		update t_class 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="classname != null">
+				 classname=#{classname},
+			</if>
+			<if test="opening_hours != null">
+				 opening_hours=#{opening_hours},
+			</if>
+			<if test="graduation_time != null">
+				graduation_time=#{graduation_time},
+			</if>
+			<if test="student_number != null">
+				student_number=#{student_number},
+			</if>
+			<if test="course_type.id != null">
+				course_id=#{course_type.id},
+			</if>
+			<if test="other_notes != null">
+				other_notes=#{other_notes},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
+	
+	<!-- 根据id修改上传课表状态	-->
+	<update id="updateUploadState" parameterType="Class">
+		update t_class set upload_state=#{upload_state} where id=#{id}
+	</update>
+	
+	<resultMap type="Course_type" id="list2">
+		<id column="id" property="id"/>
+		<result column="course_name" property="course_name"/>
+		<result column="synopsis" property="synopsis"/>
+		<result column="total_hours" property="total_hours"/>
+		<result column="course_cost" property="course_cost"/>
+	</resultMap>
+	
+	<resultMap type="Class" id="list">
+		<id column="id" property="id"/>
+		<result column="classname" property="classname"/>
+		<result column="opening_hours" property="opening_hours"/>
+		<result column="graduation_time" property="graduation_time"/>
+		<result column="state" property="state"/>
+		<result column="other_notes" property="other_notes"/>
+		<result column="entrance_number" property="entrance_number"/>
+		<result column="transfer_number" property="transfer_number"/>
+		<result column="refund_number" property="refund_number"/>
+		<result column="student_number" property="student_number"/>
+		<result column="upload_state" property="upload_state"/>
+		<collection property="course_type" ofType="Course_type">
+			<id column="id" property="id"/>
+			<result column="course_name" property="course_name"/>
+			<result column="synopsis" property="synopsis"/>
+			<result column="total_hours" property="total_hours"/>
+			<result column="course_cost" property="course_cost"/>
+		</collection>
+	</resultMap>
+	
 </mapper>

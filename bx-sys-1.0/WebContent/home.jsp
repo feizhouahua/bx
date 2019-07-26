@@ -92,10 +92,10 @@
 						教学部<img src="./images/more.png">
 					</dt>
 					<dd class="first_dd">
-						<a href="#">班级管理</a>
+						<a href="education/class/list.html?page=1" target="nl">班级管理</a>
 					</dd>
 					<dd>
-						<a href="#">课程类别</a>
+						<a href="education/course_type/list.html?page=1" target="nl">课程类别</a>
 					</dd>
 				</dl>
 

@@ -3,6 +3,7 @@ package com.hxzy.bx.service;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hxzy.bx.entity.Staff;
 

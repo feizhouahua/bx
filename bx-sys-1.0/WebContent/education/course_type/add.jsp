@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>更改部门</title>
+<title>课程类别管理</title>
 <!-- Bootstrap core CSS -->
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
@@ -25,17 +25,40 @@
 </style>
 </head>
 <body>
-<form action="updateb.html" method="post">
-<span style="font-size: 20px;font-weight: bolder;">[部门管理]</span>
+<form action="add.html" method="post">
+<span style="font-size: 20px;font-weight: bolder;">[课程类别管理]</span>
 <input id="ahref" class="btn btn-sm btn-primary" type="submit" value="保存"/>
 <input id="ahref" class="btn btn-sm btn-primary" onclick="history.go(-1)" type="button" value="返回">
 <table>
 	<tr>
-		<td>部门名称:</td>
-		<td>
-			<input type="hidden" name="id" value="${department.id}"/>
-			<input required="required" type="text" name="depart_name" value="${department.depart_name}"/>
-		</td>
+		<td>课程类别:</td>
+		<td><input type="text" name="course_name"  required="required"/></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>总学时:</td>
+		<td><input type="text" name="total_hours"  required="required"/></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>课程费用:</td>
+		<td><input type="text" name="course_cost"  required="required"/></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2">课程简介:</td>
+	</tr>
+	<tr>
+		<td colspan="2"><textarea required="required" rows="8" cols="28" name="synopsis"></textarea></td>
 	</tr>
 </table>
 </form>

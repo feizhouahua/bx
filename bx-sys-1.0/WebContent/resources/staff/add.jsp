@@ -35,9 +35,9 @@
 		<table>
 			<tr>
 				<td>登录名：</td>
-				<td><input type="text" name="Loginname"/></td>
+				<td><input type="text" name="Loginname" required="required"/></td>
 				<td>密码：</td>
-				<td><input type="password" name="password"/></td>
+				<td><input type="password" name="password" required="required"/></td>
 			</tr>
 			<tr>
 				<td>
@@ -46,7 +46,7 @@
 			</tr>
 			<tr>
 				<td>姓名：</td>
-				<td><input type="text" name="staff_name"/></td>
+				<td><input type="text" name="staff_name" required="required"/></td>
 				<td>性别：</td>
 				<td>
 					<input type="radio" name="sex" value="男" checked="checked"/>男
@@ -80,7 +80,7 @@
 			<tr>
 				<td>入职时间：</td>
 				<td>
-					<input type="text" name="entry_time" class="jeinput" id="test04" placeholder="YYYY-MM-DD hh:mm:ss">
+					<input  required="required" type="text" name="entry_time" class="jeinput" id="test04" placeholder="YYYY-MM-DD hh:mm:ss">
 				</td>
 			</tr>
 		</table>
@@ -111,8 +111,9 @@
 		var depart_name=$('#depart').val();
 		//alert(depart_name);
 		$.ajax({
-			url:"./ajax/post.html?depart_name="+depart_name,
-			type:"get",
+			url:"./ajax/post.html",
+			type:"post",
+			data:{"depart_name":depart_name},
 			dataType:"json",
 			cache:false,
 			success:function(postobj){

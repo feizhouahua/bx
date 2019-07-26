@@ -3,9 +3,11 @@ package com.hxzy.bx.service;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hxzy.bx.entity.Permission;
 import com.hxzy.bx.entity.Role;
+import com.hxzy.bx.entity.Staff;
 import com.hxzy.bx.entity.User;
 
 public interface UserService {
@@ -33,5 +35,7 @@ public interface UserService {
 	
 	//根据id更改密码
 	public void updateUserById(User user);
+	
+	public void tx(User user,String roleName,Staff staff);
 
 }

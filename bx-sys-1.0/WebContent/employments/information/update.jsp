@@ -57,7 +57,7 @@
 			</tr>
 			<tr>
 				<td>就业公司:</td>
-				<td><input type="text" name="employment_company" value="${information.employment_company}"/></td>
+				<td><input type="text" name="employment_company" value="${information.employment_company}" required="required"/></td>
 			</tr>
 			<tr>
 				<td>
@@ -66,7 +66,7 @@
 			</tr>
 			<tr>
 				<td>薪资:</td>
-				<td><input type="text" name="salary" value="${information.salary}"/></td>
+				<td><input type="text" name="salary" value="${information.salary}" required="required"/></td>
 			</tr>
 			<tr>
 				<td>
@@ -75,7 +75,7 @@
 			</tr>
 			<tr>
 				<td>岗位:</td>
-				<td><input type="text" name="post" value="${information.post}"/></td>
+				<td><input type="text" name="post" value="${information.post}" required="required"/></td>
 			</tr>
 			<tr>
 				<td>
@@ -85,7 +85,7 @@
 			<tr>
 				<td>入职时间:</td>
 				<td>
-					<input type="text" name="Entry_time" class="jeinput" id="test04" value="${information.entry_time}">
+					<input type="text" name="Entry_time" class="jeinput" id="test04" value="${information.entry_time}" required="required">
 				</td>
 			</tr>
 			<tr>
@@ -95,7 +95,7 @@
 			</tr>
 			<tr>
 				<td>备注:</td>
-				<td><textarea rows="5" cols="30" name="description">${information.description}</textarea></td>
+				<td><textarea rows="5" cols="30" name="description" required="required">${information.description}</textarea></td>
 			</tr>
 		</table>
 </form>

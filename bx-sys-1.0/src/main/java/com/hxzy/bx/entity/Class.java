@@ -18,6 +18,8 @@ public class Class implements Serializable{
 	private Integer entrance_number;
 	private Integer transfer_number;
 	private Integer refund_number;
+	private Integer student_number;
+	private String upload_state;
 	private Course_type course_type;
 	
 	public Integer getId() {
@@ -79,6 +81,18 @@ public class Class implements Serializable{
 	}
 	public void setCourse_type(Course_type course_type) {
 		this.course_type = course_type;
+	}
+	public Integer getStudent_number() {
+		return student_number;
+	}
+	public void setStudent_number(Integer student_number) {
+		this.student_number = student_number;
+	}
+	public String getUpload_state() {
+		return upload_state;
+	}
+	public void setUpload_state(String upload_state) {
+		this.upload_state = upload_state;
 	}
 	
 	

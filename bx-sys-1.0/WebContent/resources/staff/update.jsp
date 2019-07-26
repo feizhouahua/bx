@@ -36,9 +36,9 @@
 		<table>
 			<tr>
 				<td>登录名：</td>
-				<td><input type="text" name="Loginname" value="${staff.loginname}"/></td>
+				<td><input type="text" name="Loginname" value="${staff.loginname}" required="required"/></td>
 				<td>密码：</td>
-				<td><input type="password" name="password" value="${staff.password}"/></td>
+				<td><input type="password" name="password" value="${staff.password}" readonly="readonly"/></td>
 			</tr>
 			<tr>
 				<td>
@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td>姓名：</td>
-				<td><input type="text" name="staff_name" value="${staff.staff_name}"/></td>
+				<td><input type="text" name="staff_name" value="${staff.staff_name}" required="required"/></td>
 				<td>性别：</td>
 				<td>
 					<input type="radio" id="man" name="sex" value="男"/>男
@@ -81,7 +81,7 @@
 			<tr>
 				<td>入职时间：</td>
 				<td>
-					<input type="text" name="entry_time" class="jeinput" id="test04" value="${staff.entry_time}">
+					<input required="required" type="text" name="entry_time" class="jeinput" id="test04" value="${staff.entry_time}">
 				</td>
 			</tr>
 			<tr>

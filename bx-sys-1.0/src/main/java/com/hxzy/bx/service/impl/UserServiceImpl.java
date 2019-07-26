@@ -11,15 +11,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hxzy.bx.dao.UserDao;
 import com.hxzy.bx.entity.Permission;
 import com.hxzy.bx.entity.Role;
+import com.hxzy.bx.entity.Staff;
 import com.hxzy.bx.entity.User;
+import com.hxzy.bx.service.StaffService;
 import com.hxzy.bx.service.UserService;
 
 @Component("userServiceImpl")
 public class UserServiceImpl implements UserService,UserDetailsService {
+	
+	@Resource(name="staffServiceImpl")
+	private StaffService staffService;
+	public void setStaffService(StaffService staffService) {
+		this.staffService = staffService;
+	}
+	
 	@Resource
 	private UserDao userDao;
 	public void setUserDao(UserDao userDao) {
@@ -64,16 +74,19 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 			return user;
 	}
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public void addUserGetId(User user) {
 		// TODO Auto-generated method stub
 		userDao.addUserGetId(user);
 	}
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public Role getRoleIdByDepartName(String roleName) {
 		// TODO Auto-generated method stub
 		return userDao.getRoleIdByDepartName(roleName);
 	}
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public void addUserRole(User user, Role role) {
 		userDao.addUserRole(user, role);
 		
@@ -84,6 +97,20 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 		
 	}
 	
-	
+	@Transactional(rollbackFor=Exception.class)
+	public void tx(User user,String roleName,Staff staff){
+		//向user表添加一条数据并返回添加数据的user_id给user对象
+		addUserGetId(user);
+		//根据角色(部门名字)获得角色id（role_id）
+		//因为权限是按照部门来分配的
+		//所以根据部门名查找相对应的roleid
+		Role role=getRoleIdByDepartName(roleName);	
+		//向用户角色中间表添加一条数据
+		//绑定用户角色，角色绑定权限
+		addUserRole(user, role);
+		//向员工表添加一条数据
+		staffService.addStaff(staff);
+
+	}
 	
 }

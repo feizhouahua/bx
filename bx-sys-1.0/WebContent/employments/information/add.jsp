@@ -60,7 +60,7 @@
 	</tr>
 	<tr>
 		<td>就业公司:</td>
-		<td><input type="text" name="employment_company"/></td>
+		<td><input type="text" name="employment_company" required="required"/></td>
 	</tr>
 	<tr>
 		<td>
@@ -69,7 +69,7 @@
 	</tr>
 	<tr>
 		<td>薪资:</td>
-		<td><input type="text" name="salary"/></td>
+		<td><input type="text" name="salary" required="required"/></td>
 	</tr>
 	<tr>
 		<td>
@@ -78,7 +78,7 @@
 	</tr>
 	<tr>
 		<td>岗位:</td>
-		<td><input type="text" name="post"/></td>
+		<td><input type="text" name="post" required="required"/></td>
 	</tr>
 	<tr>
 		<td>
@@ -87,7 +87,7 @@
 	</tr>
 	<tr>
 		<td>入职时间:</td>
-		<td><input type="text" name="Entry_time" class="jeinput" id="test04" placeholder="YYYY-MM-DD hh:mm:ss"></td>
+		<td><input required="required" type="text" name="Entry_time" class="jeinput" id="test04" placeholder="YYYY-MM-DD hh:mm:ss"></td>
 	</tr>
 	<tr>
 		<td>
@@ -96,7 +96,7 @@
 	</tr>
 	<tr>
 		<td>备注:</td>
-		<td><textarea rows="5" cols="30" name="description"></textarea></td>
+		<td><textarea required="required" rows="5" cols="30" name="description"></textarea></td>
 	</tr>
 </table>
 </form>

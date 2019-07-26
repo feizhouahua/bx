@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,53 +98,55 @@ public class StaffController {
 		return array.toString();
 	}
 	
+	
 	@RequestMapping("resources/staff/add")
 	public String add(@ModelAttribute Staff staff,Post post,Department department) {
 		Post p=postService.getPostByName(post.getPost_name());
 		staff.setPost(p);
 		
 		//加密操作
-//	    try {
-//	    	MessageDigest md = MessageDigest.getInstance("MD5");
-//	        md.update(staff.getPassword().getBytes());
-//	        staff.setPassword(new BigInteger(1, md.digest()).toString(16));
-//	    } catch (NoSuchAlgorithmException e) {
-//	        e.printStackTrace();
-//	    }
 		PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
     	staff.setPassword(passwordEncoder.encode(staff.getPassword()));
 		
 		//添加员工的同时也向user表添加登录名和密码
 		User user=new User();
+		//获得当前时间
 		Date date=new Date();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String datetime=sdf.format(date);
-		user.setCreateDate(datetime);
-		user.setLastLoginTime(datetime);
-		user.setUsername(staff.getLoginname());
-		user.setPassword(staff.getPassword());
-		System.out.println(department.getDepart_name());
-		
-		//向user表添加一条数据并返回添加数据的user_id
+		//添加user数据
+		user.setCreateDate(datetime);//设置创建时间
+		user.setLastLoginTime(datetime);//最后登录时间
+		user.setUsername(staff.getLoginname());//设置登录名
+		user.setPassword(staff.getPassword());//设置密码
+		String roleName=department.getDepart_name();
+		/*
+		//向user表添加一条数据并返回添加数据的user_id给user对象
 		userService.addUserGetId(user);
-		
-		System.out.println(user.getId());
+		System.out.println(1/0);
 		
 		//根据角色(部门名字)获得角色id（role_id）
-		String roleName=department.getDepart_name();
+		//因为权限是按照部门来分配的
+		//所以根据部门名查找相对应的roleid
 		Role role=userService.getRoleIdByDepartName(roleName);
-		
-		System.out.println(role.getId());
 		
 		//Role role=new Role();
 		//role.setId(id);
 		
 		//向用户角色中间表添加一条数据
+		//绑定用户角色，角色绑定权限
 		userService.addUserRole(user, role);
 		
 		//userService.addUser(user);
 		//向员工表添加一条数据
 		staffService.addStaff(staff);
+		*/
+		//把三个方法集合到一起用事务管理起来
+		//个人理解，在Controller层的一个方法里调用一个Service()方法，
+		//然后在这个Service()方法中实现复杂的业务逻辑，
+		//比如调用多个Service() 方法（业务处理的代码统一归到Service层），
+		//最后添加注解@Transactional 以保证事务统一管理。
+		userService.tx(user, roleName, staff);
 		return "redirect:list.html?page=1";
 	}
 	 
@@ -174,19 +177,23 @@ public class StaffController {
 		Staff s=null;
 		if(d!=null) {
 			model.addAttribute("depart", d);
+			if(p==null) {
+				p=new Post();
+			}
 			p.setDepartment(d);
 		}
 		if(p!=null) {			
 			model.addAttribute("postname", p);
 			staff.setPost(p);
 		}
+		
 		if(staff.getStaff_name()!=null) {
 			//model.addAttribute("staffname", staff);
 			session.setAttribute("staffname", staff);
 		}
 		if (staff.getStaff_name()==null) {
 			s=(Staff) session.getAttribute("staffname");
-		}else {
+		}else {//这个else的意思是因为系统会给这些字段一个默认值 会让他不满足上面两个if条件
 			s=staff;
 		}
 		

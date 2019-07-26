@@ -32,7 +32,7 @@
 <table>
 	<tr>
 		<td>部门名称:</td>
-		<td><input type="text" name="depart_name"/></td>
+		<td><input type="text" name="depart_name"  required="required"/></td>
 	</tr>
 </table>
 </form>

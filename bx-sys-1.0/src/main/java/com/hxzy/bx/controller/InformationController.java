@@ -63,6 +63,7 @@ public class InformationController {
 	public String add(@ModelAttribute Information information) {
 		//因为学生登录了就业信息，所以学生表的状态也应该改为就业
 		String studentname=information.getStudent_name();
+		
 		studentService.updateStudentStatesByName(studentname,"就业");
 		
 		informationService.addInformation(information);

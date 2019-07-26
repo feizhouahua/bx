@@ -41,7 +41,7 @@
 				<td>&nbsp;&nbsp;&nbsp;</td>
 				<td>职务名称：</td>
 				<td>
-					<input type="text" name="post_name"/> 
+					<input required="required" type="text" name="post_name"/> 
 				</td>
 			</tr>
 		</table>

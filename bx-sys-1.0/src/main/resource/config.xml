@@ -19,5 +19,6 @@
 		<typeAlias type="com.hxzy.bx.entity.Role" alias="Role"/>
 		<typeAlias type="com.hxzy.bx.entity.Class" alias="Class"/>
 		<typeAlias type="com.hxzy.bx.entity.Course_type" alias="Course_type"/>
+		<typeAlias type="com.hxzy.bx.entity.Curriculum" alias="Curriculum"/>
 	</typeAliases>
 </configuration>
