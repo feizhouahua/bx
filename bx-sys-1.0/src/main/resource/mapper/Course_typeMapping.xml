@@ -8,5 +8,10 @@
 			where c.course_id = t.id and t.course_name = #{course}
 	</select>
 	
+	<!-- 查询学科名 -->
+	<select id="quCourse" resultType="Course_type">
+		select course_name from t_course_type
+	</select>
+	
 
 </mapper>

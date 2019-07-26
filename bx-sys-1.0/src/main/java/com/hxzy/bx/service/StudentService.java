@@ -2,6 +2,8 @@ package com.hxzy.bx.service;
 
 import java.util.List;
 
+import com.hxzy.bx.entity.RunOff;
+import com.hxzy.bx.entity.Station;
 import com.hxzy.bx.entity.Student;
 
 public interface StudentService {
@@ -21,4 +23,11 @@ public interface StudentService {
 	
 	//通过id查询学生信息
 	public Student getStubyid(Integer id);
+	
+	public String queCourse(String name);
+	
+	public void updatacla(Station station,String classname,int id);
+	
+	//delStuById
+	public void delStuById(RunOff runOff,int id);
 }

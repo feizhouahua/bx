@@ -1,5 +1,15 @@
 package com.hxzy.bx.service;
 
-public interface StationService {
+import java.util.List;
 
+import com.hxzy.bx.entity.Station;
+
+public interface StationService {
+	//添加station
+	public void addSta(Station station);
+	
+	//queryStation
+	public List<Station> queryStation(Integer start,Integer count);
+
+	public int staNum();
 }

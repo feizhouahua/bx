@@ -53,9 +53,9 @@ li{
 <td>${s.tuition_paid }/${s.unpaid_tuition }</td>
 <td>${s.state }</td>
 <td><a href="upstu.html?text=${text }&page=${page}&name=${s.classes.classname}&id=${s.id}">编辑</a></td>
-<td>升级/转班</td>
-<td>查看</td>
-<td>流失</td>
+<td><a href="transfer.html?text=${text }&page=${page}&name=${s.classes.classname}&id=${s.id}">升级/转班</a></td>
+<td><a href="chakan.html?id=${s.id}">查看</a></td>
+<td><a href="liushi.html?id=${s.id}">流失</a></td>
 </tr>
 </c:forEach>
 <tr>

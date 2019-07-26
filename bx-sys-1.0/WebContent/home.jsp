@@ -80,10 +80,10 @@
 						<a href="stu_depart/stu_manage/stus.html?page=1" target="nl">在校学生管理</a>
 					</dd>
 					<dd>
-						<a href="#">学生升级/转班</a>
+						<a href="stu_depart/checkStation/xiaoyang.html?page=1" target="nl">学生升级/转班</a>
 					</dd>
 					<dd>
-						<a href="#">学生流失情况</a>
+						<a href="stu_depart/runoff/intorunoff.html?page=1" target="nl">学生流失情况</a>
 					</dd>
 				</dl>
 

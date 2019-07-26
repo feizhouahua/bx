@@ -12,6 +12,7 @@ public class ClassServiceImpl implements ClassService {
 	
 	@Resource
 	private ClassDao classDao;
+	
 	public void setClassDao(ClassDao classDao) {
 		this.classDao = classDao;
 	}

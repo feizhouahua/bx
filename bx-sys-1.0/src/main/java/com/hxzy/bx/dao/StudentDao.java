@@ -26,4 +26,13 @@ public interface StudentDao {
 	
 	//通过id查询学生信息
 	public Student getStubyid(Integer id);
+	
+	//根据班级名称查课程
+	public String queCourse(String name);
+	
+	//升级/转班 根据班级名称修改学生的class_id
+	public void updatacla(@Param(value="classname")String classname,@Param(value="id") int id);
+	
+	//delStuById
+	public void delStuById(int id);
 }

@@ -59,4 +59,10 @@ public class ReferServiceImpl implements ReferService {
 		// TODO Auto-generated method stub
 		return referDao.queryStunum(text);
 	}
+
+	@Override
+	public void upstate(int id) {
+		// TODO Auto-generated method stub
+		referDao.upstate(id);
+	}
 }

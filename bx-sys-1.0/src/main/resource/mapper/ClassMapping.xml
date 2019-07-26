@@ -4,10 +4,4 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.ClassDao">
 	
-	<select id="queryid" parameterType="java.lang.String">
-		select id from t_class where classname=#{classname)
-	</select>
-	
-	<select id="">
-	</select>
 </mapper>

@@ -10,6 +10,7 @@
 <body>
 	<div>
 	<form action="referadd.html" method="post">
+	<input type="hidden" name="referid" value="${refered.id }">
 		<table class="table table-hover">
 			<tr><td>姓名：</td><td><input type="text" value="${refered.refername }" readonly="readonly" name="student_name"></td></tr>
 			<tr><td>电话：</td><td><input type="text" value="${refered.tel}" readonly="readonly" name="Tel"></td></tr>

@@ -23,4 +23,6 @@ public interface ReferService {
 	//数量
 	public int queryStunum(String text);
 	
+	//学生报名
+	public void upstate(int id);
 }

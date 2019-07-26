@@ -32,7 +32,7 @@ public class ReferController {
 	public String getRefer(@RequestParam(defaultValue = "") String txt, 
 			@RequestParam(defaultValue = "1") int page,HttpSession session) {
 		int count = referService.getRefernum(txt); // 总条数
-		int pagecount = 2; // 一页几条
+		int pagecount = 4; // 一页几条
 		int lastPage = count / pagecount; // 共有几页
 		if (lastPage * pagecount < count) { // 除不尽加一
 			lastPage = lastPage + 1;
@@ -86,8 +86,9 @@ public class ReferController {
 	}
 
 	@RequestMapping("refer/referStu/referadd")
-	public String referadd(@ModelAttribute Student student, HttpSession session) {
+	public String referadd(@ModelAttribute Student student,int referid, HttpSession session) {
 		session.setAttribute("referstu", student);
+		referService.upstate(referid);
 		return "redirect:../../stu_depart/stu_manage/addstu.jsp";
 	}
 
@@ -95,7 +96,7 @@ public class ReferController {
 	@RequestMapping("refer/queryStu/queryStu")
 	public String queryStu(@RequestParam(defaultValue = "") String txts, @RequestParam(defaultValue = "1") int page,HttpSession session) {
 		int counts = referService.queryStunum(txts);  //记录总条数
-		int count = 1;		             //每页几条
+		int count = 4;		             //每页几条
 		int pag = counts / count;                // 共有几页
 		if (pag * count < counts) {               //如果没除尽，页数加一
 			pag = pag + 1;

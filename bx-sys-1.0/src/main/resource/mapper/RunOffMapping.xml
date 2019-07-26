@@ -3,5 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.RunOffDao">
+	<insert id="addrunOff" parameterType="RunOff">
+		insert into t_runoff (student_name,tel,QQ,befor_classname,cause,business_time,manager,refund) 
+		values (#{student_name},#{tel},#{QQ},#{befor_classname},#{cause},#{business_time},#{manager},#{refund})
+	</insert>
+	
+	<select id="queryRunOff" resultType="RunOff">
+		select * from t_runoff limit #{start},#{count}
+	</select>
+	
+	<select id="runNum" resultType="Integer">
+		select count(1) from t_runoff
+	</select>
 	
 </mapper>

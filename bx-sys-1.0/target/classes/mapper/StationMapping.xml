@@ -3,5 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.StationDao">
+	<!-- 添加信息 -->
+	<insert id="addSta" parameterType="Station">
+		insert into t_station (student_name,operating_time,operation_type,manager,befor_classname,after_classname) 
+		values (#{student_name},#{operating_time},#{operation_type},#{manager},#{befor_classname},#{after_classname})
+	</insert>
 	
+	<select id="queryStation" resultType="Station">
+		select student_name,operating_time,operation_type,manager,befor_classname,after_classname
+		from t_station limit #{start},#{count}
+	</select>
+	
+	<select id="staNum" resultType="Integer">
+		select count(1) from t_station 
+	</select>
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.hxzy.bx.dao.Course_typeDao;
 import com.hxzy.bx.entity.Class;
+import com.hxzy.bx.entity.Course_type;
 import com.hxzy.bx.service.Course_typeService;
 
 @Component("course_typeServiceImpl")
@@ -24,6 +25,13 @@ public class Course_typeServiceImpl implements Course_typeService{
 	public List<Class> queryClass(String course) {
 		// TODO Auto-generated method stub
 		return course_typeDao.queryClass(course);
+	}
+
+	//查询学科
+	@Override
+	public List<Course_type> quCourse() {
+		// TODO Auto-generated method stub
+		return course_typeDao.quCourse();
 	}
 
 	
