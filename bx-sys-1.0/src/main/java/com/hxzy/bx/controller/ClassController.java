@@ -188,10 +188,10 @@ public class ClassController {
 		if(curriculums.size()>1) {
 			sdf=new SimpleDateFormat("yyyyMMddhhmmss");
 			for (Curriculum curriculum : curriculums) {
-				sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 				times.add(sdf.format(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(curriculum.getUpload_time())));
 			}
 			Date a=getBigtime(times);
+			sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			time=sdf.format(a);
 		}else if(curriculums.size()==1){
 			time=curriculums.get(0).getUpload_time();

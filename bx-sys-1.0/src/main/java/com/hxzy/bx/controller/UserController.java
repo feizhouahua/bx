@@ -31,10 +31,17 @@ public class UserController {
 	
 	@RequestMapping("home")
 	public String home(HttpSession session) {
+		//获取登录用户(UserDetails对象)
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()  
 				.getAuthentication()  
 				.getPrincipal();
 		session.setAttribute("loginUser", userDetails);
+//		Object principal=SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		if(principal!=null) {
+//			if(principal instanceof UserDetails) {
+//				UserDetails userDetails = (UserDetails) principal;
+//			}
+//		}
 		return "home";
 	}
 	
@@ -63,13 +70,6 @@ public class UserController {
 //			return "login";
 //		}
 //	}
-	
-	//退出登录
-	@RequestMapping("loginout")
-	public String loginout(HttpSession session) {
-		session.removeAttribute("loginUser");
-		return "login";
-	}
 	
 	//更改密码
 	@RequestMapping("change")
@@ -106,6 +106,12 @@ public class UserController {
 			//userService.updateUserById(user);
 			return "hello";
 		}
+	}
+	
+	//生成验证码
+	@RequestMapping("imageCode")
+	public String image() {
+		return "imageCode";
 	}
 	
 }

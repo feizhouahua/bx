@@ -51,7 +51,8 @@
 					<li><span>今天是：</span><span id="times"></span></li>
 					<li><span>欢迎您:${loginUser.username}</span></li>
 					<li><a href="change.html" target="nl">更改密码</a></li>
-					<li><a href="loginout.html">重新登录</a></li>
+					<!-- 因为spring security默认为我们提供了退出操作，我们只需要访问特定的url就可以退出登录了 -->
+					<li><a href="${pageContext.request.contextPath}/logout">重新登录</a></li>
 				</ul>
 			</div>
 		</div>

@@ -23,20 +23,21 @@
 	}
 	table tr td{
 		position: relative;
+		z-index: 0;
 	}
 	.time{	
-		 opacity:0.6;
          position: absolute;
-         z-index:0;
-         right: 5px;
+         z-index:9999;
+         right: 25px;
          width: 120px;
-         top: 30px;  
+         background-color:white;
+         top: 30px;
 	}
 	#up{
-		z-index: 1;
+		z-index: 0;
 	}
-	.upload:hover{
-		
+	.upload,.download{
+		z-index: 0;
 	}
 </style>
 </head>
@@ -82,7 +83,7 @@
 						<a class="upload" href="uploada.html?id=${classs.id}">上传</a>
 						<c:choose>
 							<c:when test="${classs.upload_state eq '有'}">
-								<a href="downloada.html?id=${classs.id}">下载</a>
+								<a class="download" href="downloada.html?id=${classs.id}">下载</a>
 							</c:when>
 							<c:otherwise>
 								<span>暂无</span>

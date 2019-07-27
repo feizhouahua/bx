@@ -27,6 +27,7 @@
 		<security:intercept-url pattern="/userLogin.html" access="permitAll()"/>
 		<security:intercept-url pattern="/index.html" access="permitAll()"/>
 		<security:intercept-url pattern="/hello.html" access="permitAll()"/>
+		<security:intercept-url pattern="/imageCode.html" access="permitAll()"/>
 		<security:intercept-url pattern="/error.html" access="permitAll()"/>
 		<!-- 放行静态资源 -->
 		<security:intercept-url pattern="/images/*" access="permitAll()"/>
@@ -81,9 +82,13 @@
 		<security:intercept-url pattern="/employments/information/list.html" access="hasAuthority('ROLE_ALL_EMPLOYMENTS')"/>
 		
 		<security:intercept-url pattern="/**" access="isFullyAuthenticated()"/>
-		
+		<!-- 自定义security 过滤器-->
+		<security:custom-filter ref="imageCodeAuthenticationFilter" before="FORM_LOGIN_FILTER"/>
 		<!-- 设置为表单登录  登录页为/userLogin  同步方式处理  配置登录成功和失败的跳转页 -->
-		<security:form-login login-page="/userLogin.html" authentication-failure-url="/userLogin.html?error=true" authentication-success-forward-url="/home.html"/> 
+		<!-- 同步跳转（静态） -->
+		<!-- <security:form-login login-page="/userLogin.html" authentication-failure-url="/userLogin.html?error=true" authentication-success-forward-url="/home.html"/>  -->
+		<!-- 异步跳转（动态） -->
+		<security:form-login login-page="/userLogin.html" authentication-failure-handler-ref="myAuthenticationFailureHandler" authentication-success-handler-ref="myAuthenticationSuccessHandler"/> 
 		<!-- 权限不足处理页 -->
 		<security:access-denied-handler error-page="/error.html"/>
 		<security:csrf disabled="true"/>
@@ -94,7 +99,8 @@
 		认证信息提供方式：（账户名，密码，当前用户权限）
 	 -->
 	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="myUserDetailService"><!--  user-service-ref="myUserDetailService" 引用service层方法  动态注入user信息 -->
+		<!--  user-service-ref="myUserDetailService" 引用service层方法  动态注入user信息 -->
+		<security:authentication-provider user-service-ref="myUserDetailService">
 			<!-- 写一个固定的账号 -->
 			<!-- <security:user-service>
 				<security:user name="admin" password="123" authorities="ROLE_USER"/>
@@ -103,5 +109,11 @@
 		</security:authentication-provider>
 	</security:authentication-manager>	
 	<bean id="myUserDetailService" class="com.hxzy.bx.service.impl.UserServiceImpl"/>
+	<bean id="myAuthenticationSuccessHandler" class="com.hxzy.bx.security.MyAuthenticationSuccessHandler"/>
+	<bean id="myAuthenticationFailureHandler" class="com.hxzy.bx.security.MyAuthenticationFailureHandler"/>
+	<bean id="imageCodeAuthenticationFilter" class="com.hxzy.bx.security.ImageCodeAuthenticationFilter">
+		<property name="myAuthenticationFailureHandler" ref="myAuthenticationFailureHandler"></property>
+	</bean>
 	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	
 </beans>
