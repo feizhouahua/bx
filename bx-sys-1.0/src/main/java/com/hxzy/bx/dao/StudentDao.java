@@ -7,6 +7,12 @@ import org.apache.ibatis.annotations.Param;
 import com.hxzy.bx.entity.Student;
 
 public interface StudentDao {
+	
+	//根据班级名字（classname）查找该班的学生
+	public List<Student> getStudentNames(String classname);
+	
+	//根据学生姓名(studentname)修改学生状态(state)
+	public void updateStudentStatesByName(@Param("studentname")String studentname,@Param("state")String state);
 	/* 查询学生信息 */
 	public List<Student> queryStus(@Param("text")String text,@Param("course")String course,
 			@Param("classname") String classname,@Param("start") int start,@Param("count") int count);
@@ -35,4 +41,6 @@ public interface StudentDao {
 	
 	//delStuById
 	public void delStuById(int id);
+
+
 }

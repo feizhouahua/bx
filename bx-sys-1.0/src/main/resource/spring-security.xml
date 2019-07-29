@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:security="http://www.springframework.org/schema/security"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	   http://www.springframework.org/schema/security
+	   http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+	<!-- 
+	 	spring过滤器链配置：
+	 	1.需要拦截什么资源
+	 	2.什么资源拥有什么权限	
+	 	3.定义认证方式：一：HttpBasic 二：FormLogin
+	 	4.定义登录页面，定义登录请求地址，定义错误处理方式
+	 -->
+	<security:http auto-config="true" use-expressions="true">
+	
+    <security:headers>
+        <security:frame-options disabled="true"/>
+    </security:headers>
+
+		<!-- 拦击所有资源 -->
+		<!-- 放行登录页面 都可以访问 -->
+		<security:intercept-url pattern="/userLogin.html" access="permitAll()"/>
+		<security:intercept-url pattern="/index.html" access="permitAll()"/>
+		<security:intercept-url pattern="/hello.html" access="permitAll()"/>
+		<security:intercept-url pattern="/imageCode.html" access="permitAll()"/>
+		<security:intercept-url pattern="/error.html" access="permitAll()"/>
+		<!-- 放行静态资源 -->
+		<security:intercept-url pattern="/images/*" access="permitAll()"/>
+		<security:intercept-url pattern="/css/*" access="permitAll()"/>
+		<security:intercept-url pattern="/js/*" access="permitAll()"/>
+		
+		<!-- 拦截一些页面 需要权限 hasAuthority()判断是否有这个权限-->
+		<!-- <security:intercept-url pattern="/home.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		<security:intercept-url pattern="/home.html" access="hasAuthority('ROLE_ALL_EMPLOYMENTS')"/>
+		<security:intercept-url pattern="/home.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/home.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
+		<security:intercept-url pattern="/home.html" access="hasAuthority('ROLE_ALL_EDUCATION')"/> -->
+		
+		<security:intercept-url pattern="/home.html" access="hasAnyAuthority('ROLE_ALL_EDUCATION','ROLE_ALL_RESOURCES','ROLE_ALL_EMPLOYMENTS','ROLE_ALL_REFER','ROLE_ALL_ACADEMIC')"/>
+		<security:intercept-url pattern="/update.html" access="hasAnyAuthority('ROLE_ALL_EDUCATION','ROLE_ALL_RESOURCES','ROLE_ALL_EMPLOYMENTS','ROLE_ALL_REFER','ROLE_ALL_ACADEMIC')"/>
+		
+		<!-- 教学部 -->
+		<security:intercept-url pattern="/education/course_type/add.html" access="hasAuthority('ROLE_ALL_EDUCATION')"/>
+		<security:intercept-url pattern="/education/course_type/list.html" access="hasAuthority('ROLE_ALL_EDUCATION')"/>
+		<security:intercept-url pattern="/education/course_type/update.html" access="hasAuthority('ROLE_ALL_EDUCATION')"/>
+		<security:intercept-url pattern="/education/course_type/updatea.html" access="hasAuthority('ROLE_ALL_EDUCATION')"/>
+		
+		<!-- 学工部 -->
+		<security:intercept-url pattern="/stu_depart/stu_manage/stus.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
+		<security:intercept-url pattern="/stu_depart/stu_manage/addstudent.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
+		<security:intercept-url pattern="/stu_depart/stu_manage/upstu.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
+		<security:intercept-url pattern="/stu_depart/stu_manage/add.html" access="hasAuthority('ROLE_ALL_ACADEMIC')"/>
+		
+		<!-- 咨询部 -->
+		<security:intercept-url pattern="/refer/referStu/into.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/referStu/chakan.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/referStu/xiugai.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/referStu/genzong.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/referStu/enter.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/queryStu/into.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		<security:intercept-url pattern="/refer/queryStu/queryStu.html" access="hasAuthority('ROLE_ALL_REFER')"/>
+		
+		<!-- 人力资源部 -->
+		<security:intercept-url pattern="/resources/department/list.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		<security:intercept-url pattern="/resources/department/add.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		<security:intercept-url pattern="/resources/department/update.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		<security:intercept-url pattern="/resources/post/add.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		<security:intercept-url pattern="/resources/post/list.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		<security:intercept-url pattern="/resources/post/update.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		<security:intercept-url pattern="/resources/staff/list.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		<security:intercept-url pattern="/resources/staff/add.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		<security:intercept-url pattern="/resources/staff/update.html" access="hasAuthority('ROLE_ALL_RESOURCES')"/>
+		
+		<!-- 就业部 -->
+		<security:intercept-url pattern="/employments/information/update.html" access="hasAuthority('ROLE_ALL_EMPLOYMENTS')"/>
+		<security:intercept-url pattern="/employments/information/add.html" access="hasAuthority('ROLE_ALL_EMPLOYMENTS')"/>
+		<security:intercept-url pattern="/employments/information/list.html" access="hasAuthority('ROLE_ALL_EMPLOYMENTS')"/>
+		
+		<security:intercept-url pattern="/**" access="isFullyAuthenticated()"/>
+		<!-- 自定义security 过滤器-->
+		<security:custom-filter ref="imageCodeAuthenticationFilter" before="FORM_LOGIN_FILTER"/>
+		<!-- 设置为表单登录  登录页为/userLogin  同步方式处理  配置登录成功和失败的跳转页 -->
+		<!-- 同步跳转（静态） -->
+		<!-- <security:form-login login-page="/userLogin.html" authentication-failure-url="/userLogin.html?error=true" authentication-success-forward-url="/home.html"/>  -->
+		<!-- 异步跳转（动态） -->
+		<security:form-login login-page="/userLogin.html" authentication-failure-handler-ref="myAuthenticationFailureHandler" authentication-success-handler-ref="myAuthenticationSuccessHandler"/> 
+		<!-- 权限不足处理页 -->
+		<security:access-denied-handler error-page="/error.html"/>
+		<security:csrf disabled="true"/>
+	</security:http>
+	
+	<!-- 
+		认证管理器：
+		认证信息提供方式：（账户名，密码，当前用户权限）
+	 -->
+	<security:authentication-manager>
+		<!--  user-service-ref="myUserDetailService" 引用service层方法  动态注入user信息 -->
+		<security:authentication-provider user-service-ref="myUserDetailService">
+			<!-- 写一个固定的账号 -->
+			<!-- <security:user-service>
+				<security:user name="admin" password="123" authorities="ROLE_USER"/>
+			</security:user-service> -->
+			<security:password-encoder ref="passwordEncoder"></security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>	
+	<bean id="myUserDetailService" class="com.hxzy.bx.service.impl.UserServiceImpl"/>
+	<bean id="myAuthenticationSuccessHandler" class="com.hxzy.bx.security.MyAuthenticationSuccessHandler"/>
+	<bean id="myAuthenticationFailureHandler" class="com.hxzy.bx.security.MyAuthenticationFailureHandler"/>
+	<bean id="imageCodeAuthenticationFilter" class="com.hxzy.bx.security.ImageCodeAuthenticationFilter">
+		<property name="myAuthenticationFailureHandler" ref="myAuthenticationFailureHandler"></property>
+	</bean>
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	
+</beans>

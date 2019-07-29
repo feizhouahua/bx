@@ -87,9 +87,8 @@
 		delete from t_student where id = #{id}
 	</delete>
 	
-	
-	
-	<resultMap type="com.hxzy.bx.entity.Student" id="list">
+
+	<resultMap type="Student" id="list">
 		<id column="id" property="id"/>
 		<result column="graduated_school" property="graduated_school"/>
 		<result column="education" property="education"/>
@@ -117,5 +116,16 @@
 			</collection>
 		</collection>
 	</resultMap>
+	
+	<!-- 根据班级名字（classname）查找该班的学生 -->
+	<select id="getStudentNames" parameterType="java.lang.String" resultMap="list">
+		SELECT s.id,s.student_name FROM t_student s,(SELECT id FROM t_class WHERE classname=#{classname}) c 
+		WHERE c.id=s.class_id and s.state='在读'
+	</select>
+	
+	<!-- 根据学生姓名修改学生状态 -->
+	<select id="updateStudentStatesByName">
+		update t_student set state=#{state} where student_name=#{studentname} 
+	</select>
 	
 </mapper>

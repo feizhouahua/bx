@@ -118,14 +118,4 @@
 			</collection>
 		</collection>
 	</resultMap>
-	
-	<!-- <resultMap type="Post" id="list1">
-		<id column="id" property="id"/>
-		<result column="depart_name" property="depart_name"/>
-	</resultMap>
-	
-	<resultMap type="Department" id="list1">
-		<id column="id" property="id"/>
-		<result column="depart_name" property="depart_name"/>
-	</resultMap> -->
 </mapper>

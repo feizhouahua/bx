@@ -12,6 +12,8 @@ public class Curriculum implements Serializable{
 	private Integer id;
 	private String upload_time;
 	private String upload_path;
+	private String oldname;
+	private String newname;
 	private Class classes;
 	
 	public Integer getId() {
@@ -37,6 +39,18 @@ public class Curriculum implements Serializable{
 	}
 	public void setClasses(Class classes) {
 		this.classes = classes;
+	}
+	public String getOldname() {
+		return oldname;
+	}
+	public void setOldname(String oldname) {
+		this.oldname = oldname;
+	}
+	public String getNewname() {
+		return newname;
+	}
+	public void setNewname(String newname) {
+		this.newname = newname;
 	}
 	
 	

@@ -7,11 +7,107 @@
 		select classname from t_class c,t_course_type t
 			where c.course_id = t.id and t.course_name = #{course}
 	</select>
-	
+
 	<!-- 查询学科名 -->
 	<select id="quCourse" resultType="Course_type">
 		select course_name from t_course_type
 	</select>
+	<!-- 条件查询+分页 -->
+	<select id="getListByCourse_type" resultMap="list">
+		select * from t_course_type where 1=1 
+		<if test="course_type!=null">
+			<if test="course_type.course_name!=null &amp; course_type.course_name!=''">
+				<!-- and course_name=#{course_type.course_name} -->
+				and course_name like CONCAT('%',#{course_type.course_name},'%')
+			</if>
+			<if test="course_type.synopsis!=null &amp; course_type.synopsis!=''">
+				<!-- and synopsis=#{course_type.synopsis} -->
+				and synopsis like CONCAT('%',#{course_type.synopsis},'%')
+			</if>
+			<if test="course_type.total_hours!=null &amp; gtotal_hours==null">
+				<!-- and total_hours=#{course_type.total_hours} -->
+				and total_hours >= #{course_type.total_hours}
+			</if>
+			<if test="course_type.total_hours!=null &amp; gtotal_hours!=null">
+				and total_hours between #{course_type.total_hours} and #{gtotal_hours}
+			</if>
+			<if test="course_type.course_cost!=null &amp; gcourse_cost==null">
+				<!-- and course_cost=#{course_type.course_cost} -->
+				and course_cost >= #{course_type.course_cost}
+			</if>
+			<if test="course_type.course_cost!=null &amp; gcourse_cost!=null">
+				<!-- and course_cost=#{course_type.course_cost} -->
+				and course_cost between #{course_type.course_cost} and #{gcourse_cost}
+			</if>
+		</if>
+		limit #{start},#{count}
+	</select>
 	
+	<!-- 查询再带条件的情况下数据库有多少条记录 -->
+	<select id="getCountByCourse_type" resultType="java.lang.Integer">
+		select count(*) from t_course_type where 1=1 
+		<if test="course_type!=null">
+			<if test="course_type.course_name!=null &amp; course_type.course_name!=''">
+				<!-- and course_name=#{course_type.course_name} -->
+				and course_name like CONCAT('%',#{course_type.course_name},'%')
+			</if>
+			<if test="course_type.synopsis!=null &amp; course_type.synopsis!=''">
+				<!-- and synopsis=#{course_type.synopsis} -->
+				and synopsis like CONCAT('%',#{course_type.synopsis},'%')
+			</if>
+			<if test="course_type.total_hours!=null &amp; gtotal_hours==null">
+				<!-- and total_hours=#{course_type.total_hours} -->
+				and total_hours >= #{course_type.total_hours}
+			</if>
+			<if test="course_type.total_hours!=null &amp; gtotal_hours!=null">
+				and total_hours between #{course_type.total_hours} and #{gtotal_hours}
+			</if>
+			<if test="course_type.course_cost!=null &amp; gcourse_cost==null">
+				<!-- and course_cost=#{course_type.course_cost} -->
+				and course_cost >= #{course_type.course_cost}
+			</if>
+			<if test="course_type.course_cost!=null &amp; gcourse_cost!=null">
+				<!-- and course_cost=#{course_type.course_cost} -->
+				and course_cost between #{course_type.course_cost} and #{gcourse_cost}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 根据id查找course_type -->
+	<select id="getCourse_typeById" parameterType="java.lang.Integer" resultType="Course_type">
+		select * from t_course_type where id=#{id}
+	</select>
+	
+	<!-- 添加课程类别 -->
+	<insert id="addCourse_type" parameterType="Course_type">
+		insert into t_course_type(course_name,synopsis,total_hours,course_cost) values(#{course_name},#{synopsis},#{total_hours},#{course_cost})
+	</insert>
+	
+	<!-- 修改课程类别 -->
+	<update id="updateCourse_type" parameterType="Course_type">
+		update t_course_type 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="course_name!=null &amp; course_name!=''">
+				 course_name=#{course_name},
+			</if>
+			<if test="synopsis!=null &amp; synopsis!=''">
+				 synopsis=#{synopsis},
+			</if>
+			<if test="total_hours!=null">
+				 total_hours=#{total_hours},
+			</if>
+			<if test="course_cost!=null">
+				 course_cost=#{course_cost},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
 
+	<resultMap type="Course_type" id="list">
+		<id column="id" property="id"/>
+		<result column="course_name" property="course_name"/>
+		<result column="synopsis" property="synopsis"/>
+		<result column="total_hours" property="total_hours"/>
+		<result column="course_cost" property="course_cost"/>
+	</resultMap>
 </mapper>

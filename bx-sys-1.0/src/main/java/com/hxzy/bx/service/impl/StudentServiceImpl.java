@@ -37,7 +37,18 @@ public class StudentServiceImpl implements StudentService{
 		this.runOffDao = runOffDao;
 	}
 	
+
 	@Override
+	public List<Student> getStudentNames(String classname) {
+		// TODO Auto-generated method stub
+		return studentDao.getStudentNames(classname);
+	}
+
+	@Override
+	public void updateStudentStatesByName(String studentname,String state) {
+		// TODO Auto-generated method stub
+		studentDao.updateStudentStatesByName(studentname,state);
+	}
 	public List<Student> queryStus(String text, String course, String classname, Integer start, Integer count) {
 		// TODO Auto-generated method stub
 		return studentDao.queryStus(text, course, classname, start, count);

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hxzy.bx.dao.StaffDao;
 import com.hxzy.bx.entity.Staff;
@@ -15,6 +16,7 @@ public class StaffServiceImpl implements StaffService {
 
 	@Resource
 	private StaffDao staffDao;
+	
 	public void setStaffDao(StaffDao staffDao) {
 		this.staffDao = staffDao;
 	}
@@ -28,6 +30,7 @@ public class StaffServiceImpl implements StaffService {
 		// TODO Auto-generated method stub
 		return staffDao.getStaffsByCondition(staff, start, count);
 	}
+	
 	@Override
 	public void addStaff(Staff staff) {
 		staffDao.addStaff(staff);

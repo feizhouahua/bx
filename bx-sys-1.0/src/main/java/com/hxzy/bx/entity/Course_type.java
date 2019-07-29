@@ -13,7 +13,7 @@ public class Course_type implements Serializable{
 	private String course_name;
 	private String synopsis;
 	private Integer total_hours;
-	private double course_cost;
+	private Double course_cost;
 	public Integer getId() {
 		return id;
 	}
@@ -38,10 +38,10 @@ public class Course_type implements Serializable{
 	public void setTotal_hours(Integer total_hours) {
 		this.total_hours = total_hours;
 	}
-	public double getCourse_cost() {
+	public Double getCourse_cost() {
 		return course_cost;
 	}
-	public void setCourse_cost(double course_cost) {
+	public void setCourse_cost(Double course_cost) {
 		this.course_cost = course_cost;
 	}
 	

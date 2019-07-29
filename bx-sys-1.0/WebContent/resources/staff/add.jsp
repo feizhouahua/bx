@@ -4,25 +4,58 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>添加部门</title>
+<title>添加员工</title>
+<!-- Bootstrap core CSS -->
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="../../css/dashboard.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="../../css/jedate.css">
+<script type="text/javascript" src="../../js/jedate.js"></script>
+<style type="text/css">
+	#ahref{
+		float: right;
+		margin-left: 10px;
+	}
+	table{
+		margin: 0px auto; 
+		margin-top: 50px;
+	}
+	table tr td:nth-child(odd){
+		padding-left:10px;
+		font-weight: bolder;
+	}
+</style>
 <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 	<form action="add.html" method="post">
+		<span style="font-size: 20px;font-weight: bolder;">[员工管理]</span>
+		<input id="ahref" class="btn btn-sm btn-primary" type="submit" value="保存"/>
+		<input id="ahref" class="btn btn-sm btn-primary" onclick="history.go(-1)" type="button" value="返回">
 		<table>
 			<tr>
 				<td>登录名：</td>
-				<td><input type="text" name="Loginname"/></td>
+				<td><input type="text" name="Loginname" required="required"/></td>
 				<td>密码：</td>
-				<td><input type="password" name="password"/></td>
+				<td><input type="password" name="password" required="required"/></td>
+			</tr>
+			<tr>
+				<td>
+					<br>
+				</td>
 			</tr>
 			<tr>
 				<td>姓名：</td>
-				<td><input type="text" name="staff_name"/></td>
+				<td><input type="text" name="staff_name" required="required"/></td>
 				<td>性别：</td>
 				<td>
 					<input type="radio" name="sex" value="男" checked="checked"/>男
 					<input type="radio" name="sex" value="女"/>女
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br>
 				</td>
 			</tr>
 			<tr>
@@ -40,11 +73,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td>入职时间：</td>
-				<td><input type="date" name="entry_time"/></td>
+				<td>
+					<br>
+				</td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="确认" /></td>
+				<td>入职时间：</td>
+				<td>
+					<input  required="required" type="text" name="entry_time" class="jeinput" id="test04" placeholder="YYYY-MM-DD hh:mm:ss">
+				</td>
 			</tr>
 		</table>
 	</form>
@@ -74,8 +111,9 @@
 		var depart_name=$('#depart').val();
 		//alert(depart_name);
 		$.ajax({
-			url:"./ajax/post.html?depart_name="+depart_name,
-			type:"get",
+			url:"./ajax/post.html",
+			type:"post",
+			data:{"depart_name":depart_name},
 			dataType:"json",
 			cache:false,
 			success:function(postobj){
@@ -90,6 +128,18 @@
 			},
 		});
 	});
+	
+	jeDate("#test04",{
+        festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        method:{
+            choose:function (params) {
+                
+            }
+        },
+        format: "YYYY-MM-DD hh:mm:ss"
+    });  
 </script>
 </body>
 </html>

@@ -3,13 +3,63 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.UserDao">
+	
+	<!-- 登录 -->
 	<select id="getLogin" parameterType="User" resultType="User">
 		select id,username,password from t_user where username=#{username} and password=#{password}
 	</select>
+	
+	<!-- 查询根据username当前用户对象 -->
+	<select id="getUserByName" parameterType="java.lang.String" resultType="User">
+		select * from t_user where username=#{username}
+	</select>
+	
+	<!-- /查询当前用户拥有的权限 -->
+	<select id="getPermissionByUsername" parameterType="java.lang.String" resultType="Permission">
+		SELECT p.* FROM 
+		t_user u 
+		INNER JOIN t_user_role ur ON u.id=ur.user_id
+		INNER JOIN t_role_permission rp ON ur.role_id=rp.role_id
+		INNER JOIN t_permission p ON rp.perm_id=p.id
+		WHERE u.username=#{username}
+	</select>
+	
+	<!-- //添加登录用户	-->
+	<insert id="addUser" parameterType="User">
+		insert into t_user(username,password) values(#{username},#{password});
+	</insert>
+	
+	<!-- 添加一个用户信息并返回一个id -->
+	<insert id="addUserGetId" parameterType="User" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into t_user(username,password,createDate,lastLoginTime,enabled,accountNonExpired,accountNonLocked,credentialsNonExpired)
+		 values(#{username},#{password},#{createDate},#{lastLoginTime},#{enabled},#{accountNonExpired},#{accountNonLocked},#{credentialsNonExpired})
+	</insert>
+	
+	<!-- 根据添加员工的所在部门，查询角色表相对应的角色名（即部门名称）,找到相对应的roleid -->
+	<select id="getRoleIdByDepartName" parameterType="java.lang.String" resultType="Role">
+		select id from t_role where roleName=#{roleName}
+	</select>
+	
+	<!-- 因为每个用户都有角色信息，添加一个用户信息，用户角色表也应该添加一条信息 -->
+	<insert id="addUserRole">
+		insert into t_user_role(user_id,role_id) values(#{user.id},#{role.id})
+	</insert>
+	
+	<!-- //根据id更改密码  -->
+	<update id="updateUserById" parameterType="User">
+		update t_user set password=#{password} where id=#{id}
+	</update>
+	
 	
 	<resultMap type="User" id="list">
 		<id column="id" property="id"/>
 		<result column="username" property="username"/>
 		<result column="password" property="password"/>
+		<result column="createDate" property="createDate"/>
+		<result column="lastLoginTime" property="lastLoginTime"/>
+		<result column="enabled" property="enabled"/>
+		<result column="accountNonExpired" property="accountNonExpired"/>
+		<result column="accountNonLocked" property="accountNonLocked"/>
+		<result column="credentialsNonExpired" property="credentialsNonExpired"/>
 	</resultMap>
 </mapper>

@@ -50,8 +50,9 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><span>今天是：</span><span id="times"></span></li>
 					<li><span>欢迎您:${loginUser.username}</span></li>
-					<li><a href="#">更改密码</a></li>
-					<li><a href="#">重新登录</a></li>
+					<li><a href="change.html" target="nl">更改密码</a></li>
+					<!-- 因为spring security默认为我们提供了退出操作，我们只需要访问特定的url就可以退出登录了 -->
+					<li><a href="${pageContext.request.contextPath}/logout">重新登录</a></li>
 				</ul>
 			</div>
 		</div>
@@ -92,10 +93,10 @@
 						教学部<img src="./images/more.png">
 					</dt>
 					<dd class="first_dd">
-						<a href="#">班级管理</a>
+						<a href="education/class/list.html?page=1" target="nl">班级管理</a>
 					</dd>
 					<dd>
-						<a href="#">课程类别</a>
+						<a href="education/course_type/list.html?page=1" target="nl">课程类别</a>
 					</dd>
 				</dl>
 
@@ -104,7 +105,7 @@
 						就业部<img src="./images/more.png">
 					</dt>
 					<dd class="first_dd">
-						<a href="#">就业情况</a>
+						<a href="employments/information/list.html?page=1" target="nl">就业情况</a>
 					</dd>
 				</dl>
 
@@ -127,7 +128,7 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h2 class="sub-header">Section title</h2>
 				<div class="table-responsive">
-					<iframe name="nl" ref="iframe" src="" frameborder="no"></iframe>
+					<iframe name="nl" ref="iframe" src="hello.jsp" frameborder="no"></iframe>
 				</div>
 				
 			</div>

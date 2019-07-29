@@ -4,4 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxzy.bx.dao.CurriculumDao">
 	
+	<!-- //根据class_id查询上传表（curriculum）-->
+	<select id="getCurriculumById" parameterType="java.lang.Integer" resultMap="list">
+		select * from t_curriculum where class_id=#{class_id}
+	</select>
+	
+	<!-- 添加一条上传记录 -->
+	<insert id="addCurriculum" parameterType="Curriculum">
+		insert into t_curriculum(class_id,upload_time,upload_path,oldname,newname) values(#{classes.id},#{upload_time},#{upload_path},#{oldname},#{newname})
+	</insert>
+	
+	<resultMap type="Curriculum" id="list">
+		<id column="id" property="id"/>
+		<result column="upload_time" property="upload_time"/>
+		<result column="upload_path" property="upload_path"/>
+		<result column="oldname" property="oldname"/>
+		<result column="newname" property="newname"/>
+		<collection property="classes" ofType="Class">
+			<id column="id" property="id"/>
+			<result column="classname" property="classname"/>
+			<result column="opening_hours" property="opening_hours"/>
+			<result column="graduation_time" property="graduation_time"/>
+			<result column="state" property="state"/>
+			<result column="other_notes" property="other_notes"/>
+			<result column="entrance_number" property="entrance_number"/>
+			<result column="transfer_number" property="transfer_number"/>
+			<result column="refund_number" property="refund_number"/>
+			<result column="student_number" property="student_number"/>
+			<result column="upload_state" property="upload_state"/>
+			<collection property="course_type" ofType="Course_type">
+				<id column="id" property="id"/>
+				<result column="course_name" property="course_name"/>
+				<result column="synopsis" property="synopsis"/>
+				<result column="total_hours" property="total_hours"/>
+				<result column="course_cost" property="course_cost"/>
+			</collection>
+		</collection>
+	</resultMap>
+	
 </mapper>
