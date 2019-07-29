@@ -40,17 +40,17 @@
 		
 	<table class="table table-striped">
 		<tr>
-			<td>姓名</td>
-			<td>入学时间</td>
-			<td>班级</td>
-			<td>QQ</td>
-			<td>联系电话</td>
-			<td>已付/应付学费</td>
-			<td>状态</td>
-			<td>编辑</td>
-			<td>升级/转班</td>
-			<td>查看</td>
-			<td>流失</td>
+			<th>姓名</th>
+			<th>入学时间</th>
+			<th>班级</th>
+			<th>QQ</th>
+			<th>联系电话</th>
+			<th>已付/应付学费</th>
+			<th>状态</th>
+			<th>编辑</th>
+			<th>升级/转班</th>
+			<th>查看</th>
+			<th>流失</th>
 		</tr>
 		<c:forEach items="${students }" var="s">
 			<tr>

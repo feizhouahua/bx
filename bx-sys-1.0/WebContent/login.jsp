@@ -84,11 +84,15 @@
 						if(data.success==false){
 							$("#error").append("用户名或密码错误!");
 						}
-						
 					}
 				}
 			},"json");
 		});
+	});
+	$(function() {
+		if (window != top) {
+		top.location.href = location.href;
+		}
 	});
 	
 </script>
